@@ -4,12 +4,14 @@ import { cn } from "@/lib/utils";
 
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
+import { useEffect, useState } from "react";
 
 interface FilterCarouselProps {
   value?: string | null;
@@ -27,18 +29,36 @@ export const FilterCarousel = ({
   onSelect,
   data,
 }: FilterCarouselProps) => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
   console.log(onSelect);
 
   return (
     <div className="relative w-full">
       <div
         className={cn(
-          "absolute left-10 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none",
-          false && "hidden"
+          "absolute left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none",
+          current === 1 && "hidden"
         )}
       />
 
       <Carousel
+        setApi={setApi}
         opts={{
           align: "start",
           dragFree: true,
@@ -48,7 +68,7 @@ export const FilterCarousel = ({
         <CarouselContent className="-ml-3">
           <CarouselItem className="pl-3 basis-auto">
             <Badge
-              variant={value === null ? "default" : "secondary"}
+              variant={!value ? "default" : "secondary"}
               className="px-3 py-1 rounded-lg cursor-pointer whitespace-nowrap text-sm"
             >
               All
@@ -74,8 +94,8 @@ export const FilterCarousel = ({
 
       <div
         className={cn(
-          "absolute right-10 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none",
-          false && "hidden"
+          "absolute right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none",
+          current === count && "hidden"
         )}
       />
     </div>
