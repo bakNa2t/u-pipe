@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+
 import {
   Carousel,
   CarouselContent,
@@ -29,6 +31,13 @@ export const FilterCarousel = ({
 
   return (
     <div className="relative w-full">
+      <div
+        className={cn(
+          "absolute left-10 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none",
+          false && "hidden"
+        )}
+      />
+
       <Carousel
         opts={{
           align: "start",
@@ -62,6 +71,13 @@ export const FilterCarousel = ({
         <CarouselPrevious className="left-0 z-20" />
         <CarouselNext className="right-0 z-20" />
       </Carousel>
+
+      <div
+        className={cn(
+          "absolute right-10 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none",
+          false && "hidden"
+        )}
+      />
     </div>
   );
 };
