@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 import {
@@ -11,7 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
-import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface FilterCarouselProps {
   value?: string | null;
@@ -66,14 +67,25 @@ export const FilterCarousel = ({
         className="w-full px-12"
       >
         <CarouselContent className="-ml-3">
-          <CarouselItem className="pl-3 basis-auto">
-            <Badge
-              variant={!value ? "default" : "secondary"}
-              className="px-3 py-1 rounded-lg cursor-pointer whitespace-nowrap text-sm"
-            >
-              All
-            </Badge>
-          </CarouselItem>
+          {isLoading &&
+            Array.from({ length: 16 }).map((_, index) => (
+              <CarouselItem key={index} className="pl-3 basis-auto">
+                <Skeleton className="w-[100px] h-full px-3 py-1 rounded-lg text-sm font-semibold">
+                  &nbsp;
+                </Skeleton>
+              </CarouselItem>
+            ))}
+
+          {!isLoading && (
+            <CarouselItem className="pl-3 basis-auto">
+              <Badge
+                variant={!value ? "default" : "secondary"}
+                className="px-3 py-1 rounded-lg cursor-pointer whitespace-nowrap text-sm"
+              >
+                All
+              </Badge>
+            </CarouselItem>
+          )}
 
           {!isLoading &&
             data.map((item) => (
