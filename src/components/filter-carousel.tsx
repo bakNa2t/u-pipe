@@ -17,7 +17,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 interface FilterCarouselProps {
   value?: string | null;
   isLoading?: boolean;
-  onSelect?: (value: string | null) => void;
+  onSelectAction: (value: string | null) => void;
   data: {
     value: string;
     label: string;
@@ -27,7 +27,7 @@ interface FilterCarouselProps {
 export const FilterCarousel = ({
   value,
   isLoading,
-  onSelect,
+  onSelectAction,
   data,
 }: FilterCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
@@ -46,8 +46,6 @@ export const FilterCarousel = ({
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
-
-  console.log(onSelect);
 
   return (
     <div className="relative w-full">
@@ -77,7 +75,10 @@ export const FilterCarousel = ({
             ))}
 
           {!isLoading && (
-            <CarouselItem className="pl-3 basis-auto">
+            <CarouselItem
+              onClick={() => onSelectAction(null)}
+              className="pl-3 basis-auto"
+            >
               <Badge
                 variant={!value ? "default" : "secondary"}
                 className="px-3 py-1 rounded-lg cursor-pointer whitespace-nowrap text-sm"
@@ -89,7 +90,11 @@ export const FilterCarousel = ({
 
           {!isLoading &&
             data.map((item) => (
-              <CarouselItem key={item.value} className="pl-3 basis-auto">
+              <CarouselItem
+                key={item.value}
+                className="pl-3 basis-auto"
+                onClick={() => onSelectAction(item.value)}
+              >
                 <Badge
                   variant={value === item.value ? "default" : "secondary"}
                   className="px-3 py-1 rounded-lg cursor-pointer whitespace-nowrap text-sm"
