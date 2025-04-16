@@ -1,12 +1,18 @@
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 
-import { SidebarHeader } from "@/components/ui/sidebar";
+import {
+  SidebarHeader,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "@/components/ui/sidebar";
 import { UserAvatar } from "@/components/user-avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const StudioSidebarHeader = () => {
   const { user } = useUser();
+  const { state } = useSidebar();
 
   if (!user) {
     return (
@@ -17,6 +23,23 @@ export const StudioSidebarHeader = () => {
           <Skeleton className="w-[100px] h-4" />
         </div>
       </SidebarHeader>
+    );
+  }
+
+  if (state === "collapsed") {
+    return (
+      <SidebarMenuItem>
+        <SidebarMenuButton tooltip="Your profile" asChild>
+          <Link href="/users/current">
+            <UserAvatar
+              imageUrl={user.imageUrl}
+              name={user.fullName ?? "User"}
+              size="xs"
+            />
+            <span className="text-sm">Your profile</span>
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
     );
   }
 
