@@ -62,7 +62,7 @@ export const videoRelations = relations(videos, ({ one }) => ({
     fields: [videos.userId],
     references: [users.id],
   }),
-  categories: one(categories, {
+  category: one(categories, {
     fields: [videos.categoryId],
     references: [categories.id],
   }),
