@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 
+import { StudioSidebarHeader } from "./StudioSidebarHeader";
+
 export const StudioSidebar = () => {
   const pathname = usePathname();
 
@@ -22,6 +24,8 @@ export const StudioSidebar = () => {
       <SidebarContent className="bg-background">
         <SidebarGroup>
           <SidebarMenu>
+            <StudioSidebarHeader />
+
             <SidebarMenuItem>
               <SidebarMenuButton
                 tooltip="Content"
