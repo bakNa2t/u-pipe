@@ -15,7 +15,7 @@ export const AuthButton = () => {
               href="/studio"
               label="Studio"
               labelIcon={<ClapperboardIcon className="size-4" />}
-            ></UserButton.Link>
+            />
           </UserButton.MenuItems>
         </UserButton>
       </SignedIn>
