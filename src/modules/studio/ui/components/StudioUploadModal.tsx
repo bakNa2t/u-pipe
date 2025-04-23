@@ -4,6 +4,7 @@ import { Loader2Icon, PlusIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { ResponsiveModal } from "@/components/responsive-modal";
 
 import { trpc } from "@/trpc/client";
 
@@ -20,13 +21,23 @@ export const StudioUploadModal = () => {
   });
 
   return (
-    <Button
-      variant="secondary"
-      onClick={() => create.mutate()}
-      disabled={create.isPending}
-    >
-      {create.isPending ? <Loader2Icon /> : <PlusIcon />}
-      Create
-    </Button>
+    <>
+      <ResponsiveModal
+        title="Upload"
+        open={!!create.data}
+        onOpenChange={() => create.reset()}
+      >
+        <p>This will be an uploader</p>
+      </ResponsiveModal>
+
+      <Button
+        variant="secondary"
+        onClick={() => create.mutate()}
+        disabled={create.isPending}
+      >
+        {create.isPending ? <Loader2Icon /> : <PlusIcon />}
+        Create
+      </Button>
+    </>
   );
 };
