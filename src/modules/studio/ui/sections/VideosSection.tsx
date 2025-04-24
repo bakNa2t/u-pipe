@@ -14,6 +14,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { VideoThumbnail } from "@/modules/videos/ui/components/VideoThumbnail";
+
 import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
 
@@ -63,7 +65,13 @@ const VideosSectionSuspense = () => {
                   legacyBehavior
                 >
                   <TableRow className="cursor-pointer">
-                    <TableCell>{video.title}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-4">
+                        <div className="relative aspect-video w-36 shrink-0">
+                          <VideoThumbnail />
+                        </div>
+                      </div>
+                    </TableCell>
                     <TableCell>visibility</TableCell>
                     <TableCell>status</TableCell>
                     <TableCell>date</TableCell>
