@@ -1,13 +1,17 @@
 import Image from "next/image";
 
+import { formatDuration } from "@/lib/utils";
+
 interface VideoThumbnailProps {
   title: string;
+  duration: number;
   imageUrl?: string | null;
   previewUrl?: string | null;
 }
 
 export const VideoThumbnail = ({
   title,
+  duration,
   imageUrl,
   previewUrl,
 }: VideoThumbnailProps) => {
@@ -30,6 +34,9 @@ export const VideoThumbnail = ({
       </div>
 
       {/* duration box */}
+      <div className="absolute bottom-1 right-2 px-1 py-0.5 rounded bg-black/80 text-xs text-white font-medium">
+        {formatDuration(duration)}
+      </div>
     </div>
   );
 };
