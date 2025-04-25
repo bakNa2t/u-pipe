@@ -60,6 +60,33 @@ export const POST = async (request: Request) => {
 
       break;
     }
+
+    case "video.asset.ready": {
+      const data = payload.data as VideoAssetReadyWebhookEvent["data"];
+      const playbackId = data.playback_ids?.[0].id;
+
+      if (!data.upload_id) {
+        return new Response("Error: No upload ID found", { status: 400 });
+      }
+
+      if (!playbackId) {
+        return new Response("Error: No playback ID found", { status: 400 });
+      }
+
+      const thumbnailUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
+
+      await db
+        .update(videos)
+        .set({
+          muxStatus: data.status,
+          muxPlaybackId: playbackId,
+          muxAssetId: data.id,
+          thumbnailUrl,
+        })
+        .where(eq(videos.muxUploadId, data.upload_id));
+
+      break;
+    }
   }
 
   return new Response("Webhook recevied", { status: 200 });
