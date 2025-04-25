@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { format } from "date-fns";
 
 import { InfiniteScroll } from "@/components/infinite-scroll";
 import {
@@ -18,6 +19,7 @@ import { VideoThumbnail } from "@/modules/videos/ui/components/VideoThumbnail";
 
 import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
+import { snakeCaseToTitle } from "@/lib/utils";
 
 export const VideosSection = () => {
   return (
@@ -75,11 +77,26 @@ const VideosSectionSuspense = () => {
                             previewUrl={video.previewUrl}
                           />
                         </div>
+
+                        <div className="flex flex-col overflow-hidden gap-y-1">
+                          <span className="text-sm line-clamp-1">
+                            {video.title}
+                          </span>
+                          <span className="text-xs text-muted-foreground line-clamp-1">
+                            {video.description || "No description"}
+                          </span>
+                        </div>
                       </div>
                     </TableCell>
                     <TableCell>visibility</TableCell>
-                    <TableCell>status</TableCell>
-                    <TableCell>date</TableCell>
+                    <TableCell>
+                      <div className="flex items-center">
+                        {snakeCaseToTitle(video.muxStatus || "Error")}
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-sm truncate">
+                      {format(new Date(video.createdAt), "d MMM yyyy")}
+                    </TableCell>
                     <TableCell>views</TableCell>
                     <TableCell>comments</TableCell>
                     <TableCell>likes</TableCell>
