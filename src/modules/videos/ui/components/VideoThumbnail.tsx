@@ -1,15 +1,31 @@
 import Image from "next/image";
 
-export const VideoThumbnail = () => {
+interface VideoThumbnailProps {
+  title: string;
+  imageUrl?: string | null;
+  previewUrl?: string | null;
+}
+
+export const VideoThumbnail = ({
+  title,
+  imageUrl,
+  previewUrl,
+}: VideoThumbnailProps) => {
   return (
-    <div className="relative">
+    <div className="relative group">
       {/* wrapper */}
       <div className="relative w-full overflow-hidden rounded-xl aspect-video">
         <Image
-          src="/placeholder.svg"
-          alt="Thumbnail"
+          src={imageUrl ?? "/placeholder.svg"}
+          alt={title}
           fill
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover group-hover:opacity-0"
+        />
+        <Image
+          src={previewUrl ?? "/placeholder.svg"}
+          alt={title}
+          fill
+          className="w-full h-full object-cover opacity-0 group-hover:opacity-100"
         />
       </div>
 
