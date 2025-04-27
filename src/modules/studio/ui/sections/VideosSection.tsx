@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { VideoThumbnail } from "@/modules/videos/ui/components/VideoThumbnail";
 
@@ -24,11 +25,50 @@ import { snakeCaseToTitle } from "@/lib/utils";
 
 export const VideosSection = () => {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<VideosSectionSkeleton />}>
       <ErrorBoundary fallback={<p>Error...</p>}>
         <VideosSectionSuspense />
       </ErrorBoundary>
     </Suspense>
+  );
+};
+
+const VideosSectionSkeleton = () => {
+  return (
+    <>
+      <div className="border-y">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[510px] pl-6">Video</TableHead>
+              <TableHead>Visibility</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead className="text-right">Views</TableHead>
+              <TableHead className="text-right">Comments</TableHead>
+              <TableHead className="text-right pr-6">Likes</TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <TableRow key={index}>
+                <TableCell className="pl-6">
+                  <div className="flex items-center gap-4">
+                    <Skeleton className="w-36 h-20" />
+
+                    <div className="flex flex-col gap-2">
+                      <Skeleton className="w-[100px] h-4" />
+                      <Skeleton className="w-[150px] h-3" />
+                    </div>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </>
   );
 };
 
