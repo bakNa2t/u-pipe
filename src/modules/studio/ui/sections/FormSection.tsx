@@ -22,7 +22,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 import { videoUpdateSchema } from "@/db/schema";
@@ -103,6 +111,55 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                       placeholder="Add a title for your video"
                     />
                   </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Descrition</FormLabel>
+
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      value={field.value ?? ""}
+                      rows={10}
+                      className="pl-10 resize-none"
+                      placeholder="Add a description for your video"
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="categoryId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value?.toString() ?? undefined}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+
+                    <SelectContent>
+                      <SelectItem value={"Typescript"}>Typescript</SelectItem>
+                    </SelectContent>
+                  </Select>
 
                   <FormMessage />
                 </FormItem>
