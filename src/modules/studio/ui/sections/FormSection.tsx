@@ -1,9 +1,12 @@
 "use client";
 
-import { trpc } from "@/trpc/client";
+import { z } from "zod";
 import { Suspense } from "react";
+import { useForm } from "react-hook-form";
 import { ErrorBoundary } from "react-error-boundary";
 import { MoreVerticalIcon, TrashIcon } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { trpc } from "@/trpc/client";
 
 import {
   DropdownMenu,
@@ -11,7 +14,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
+import { videoUpdateSchema } from "@/db/schema";
 
 interface FormSectionProps {
   videoId: string;
@@ -30,35 +44,73 @@ export const FormSection = ({ videoId }: FormSectionProps) => {
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
 
+  const form = useForm<z.infer<typeof videoUpdateSchema>>({
+    resolver: zodResolver(videoUpdateSchema),
+    defaultValues: video,
+  });
+
+  const onSubmit = async (data: z.infer<typeof videoUpdateSchema>) => {
+    console.log(data);
+  };
+
   return (
-    <div className="flex items-center justify-between mb-6">
-      <div>
-        <h1 className="text-2xl font-bold">Video details</h1>
-        <p className="text-xs text-muted-foreground">
-          Mange your video details
-        </p>
-      </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        {/* Header block */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-bold">Video details</h1>
+            <p className="text-xs text-muted-foreground">
+              Mange your video details
+            </p>
+          </div>
 
-      <div className="flex items-center gap-x-2">
-        <Button type="submit" disabled={false}>
-          Save
-        </Button>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <MoreVerticalIcon />
+          <div className="flex items-center gap-x-2">
+            <Button type="submit" disabled={false}>
+              Save
             </Button>
-          </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>
-              <TrashIcon className="size-4 mr-2" />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <MoreVerticalIcon />
+                </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  <TrashIcon className="size-4 mr-2" />
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+
+        {/* Form block */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          <div className="space-y-8 lg:col-span-3">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Add a title for your video"
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+      </form>
+    </Form>
   );
 };
