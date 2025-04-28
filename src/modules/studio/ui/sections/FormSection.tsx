@@ -51,6 +51,7 @@ export const FormSection = ({ videoId }: FormSectionProps) => {
 
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
+  const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
   const form = useForm<z.infer<typeof videoUpdateSchema>>({
     resolver: zodResolver(videoUpdateSchema),
@@ -157,7 +158,11 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     </FormControl>
 
                     <SelectContent>
-                      <SelectItem value={"Typescript"}>Typescript</SelectItem>
+                      {categories.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
 
