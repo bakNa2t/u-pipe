@@ -1,10 +1,16 @@
 "use client";
 
 import { z } from "zod";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 import { ErrorBoundary } from "react-error-boundary";
-import { MoreVerticalIcon, TrashIcon } from "lucide-react";
+import {
+  CopyCheckIcon,
+  CopyIcon,
+  MoreVerticalIcon,
+  TrashIcon,
+} from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { trpc } from "@/trpc/client";
@@ -56,6 +62,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const utils = trpc.useUtils();
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
+  const [isCopied, setIsCopied] = useState(false);
 
   const update = trpc.videos.update.useMutation({
     onSuccess: () => {
@@ -76,6 +83,19 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
   const onSubmit = (data: z.infer<typeof videoUpdateSchema>) => {
     update.mutateAsync(data);
+  };
+
+  const fullUrl = `${
+    process.env.VERCEL_URL || `http://localhost:3000/videos/${videoId}`
+  }`;
+
+  const onCopy = async () => {
+    await navigator.clipboard.writeText(fullUrl);
+    setIsCopied(true);
+
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
   };
 
   return (
@@ -195,6 +215,33 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   playbackId={video.muxPlaybackId}
                   thumbnailUrl={video.thumbnailUrl}
                 />
+              </div>
+
+              <div className="flex flex-col gap-y-6 p-4">
+                <div className="flex justify-between items-center gap-x-2">
+                  <div className="flex flex-col gap-y-1">
+                    <p className="text-xs text-muted-foreground">Video link</p>
+
+                    <div className="flex items-center gap-x-2">
+                      <Link href={`/videos/${video.id}`}>
+                        <p className="line-clamp-1 text-sm text-blue-500">
+                          {fullUrl}
+                        </p>
+                      </Link>
+
+                      <Button
+                        type="button"
+                        size="icon"
+                        variant="ghost"
+                        onClick={onCopy}
+                        className="shrink-0"
+                        disabled={isCopied}
+                      >
+                        {isCopied ? <CopyCheckIcon /> : <CopyIcon />}
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
