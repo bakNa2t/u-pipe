@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { ErrorBoundary } from "react-error-boundary";
 import { MoreVerticalIcon, TrashIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 import { trpc } from "@/trpc/client";
 
 import {
@@ -50,16 +51,29 @@ export const FormSection = ({ videoId }: FormSectionProps) => {
 };
 
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
+  const utils = trpc.useUtils();
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
+
+  const update = trpc.videos.update.useMutation({
+    onSuccess: () => {
+      utils.studio.getMany.invalidate();
+      utils.studio.getOne.invalidate({ id: videoId });
+
+      toast.success("Video updated successfully");
+    },
+    onError: () => {
+      toast.error("Failed to update video");
+    },
+  });
 
   const form = useForm<z.infer<typeof videoUpdateSchema>>({
     resolver: zodResolver(videoUpdateSchema),
     defaultValues: video,
   });
 
-  const onSubmit = async (data: z.infer<typeof videoUpdateSchema>) => {
-    console.log(data);
+  const onSubmit = (data: z.infer<typeof videoUpdateSchema>) => {
+    update.mutateAsync(data);
   };
 
   return (
@@ -75,7 +89,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
           </div>
 
           <div className="flex items-center gap-x-2">
-            <Button type="submit" disabled={false}>
+            <Button type="submit" disabled={update.isPending}>
               Save
             </Button>
 
@@ -130,7 +144,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                       {...field}
                       value={field.value ?? ""}
                       rows={10}
-                      className="pl-10 resize-none"
+                      className="pr-10 resize-none"
                       placeholder="Add a description for your video"
                     />
                   </FormControl>
