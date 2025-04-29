@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { Suspense, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { ErrorBoundary } from "react-error-boundary";
@@ -62,6 +63,7 @@ export const FormSection = ({ videoId }: FormSectionProps) => {
 };
 
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
+  const router = useRouter();
   const utils = trpc.useUtils();
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
@@ -73,6 +75,17 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
       utils.studio.getOne.invalidate({ id: videoId });
 
       toast.success("Video updated successfully");
+    },
+    onError: () => {
+      toast.error("Failed to update video");
+    },
+  });
+
+  const remove = trpc.videos.remove.useMutation({
+    onSuccess: () => {
+      utils.studio.getMany.invalidate();
+      toast.success("Video removed successfully");
+      router.push("/studio");
     },
     onError: () => {
       toast.error("Failed to update video");
@@ -126,7 +139,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => remove.mutate({ id: videoId })}
+                >
                   <TrashIcon className="size-4 mr-2" />
                   Delete
                 </DropdownMenuItem>
