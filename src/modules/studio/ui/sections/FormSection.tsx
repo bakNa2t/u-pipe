@@ -8,6 +8,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import {
   CopyCheckIcon,
   CopyIcon,
+  Globe2Icon,
+  LockIcon,
   MoreVerticalIcon,
   TrashIcon,
 } from "lucide-react";
@@ -43,6 +45,7 @@ import { Button } from "@/components/ui/button";
 import { VideoPlayer } from "@/modules/videos/ui/components/VideoPlayer";
 
 import { videoUpdateSchema } from "@/db/schema";
+import { snakeCaseToTitle } from "@/lib/utils";
 
 interface FormSectionProps {
   videoId: string;
@@ -242,8 +245,68 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     </div>
                   </div>
                 </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex flex-col gap-y-1">
+                    <p className="text-xs text-muted-foreground">
+                      Video status
+                    </p>
+                    <p className="text-sm">
+                      {snakeCaseToTitle(video.muxStatus || "preparing")}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex flex-col gap-y-1">
+                    <p className="text-xs text-muted-foreground">
+                      Subtitles status
+                    </p>
+                    <p className="text-sm">
+                      {snakeCaseToTitle(video.muxTrackStatus || "no_subtitles")}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <FormField
+              control={form.control}
+              name="visibility"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Visibility</FormLabel>
+
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value?.toString() ?? undefined}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select visibility" />
+                      </SelectTrigger>
+                    </FormControl>
+
+                    <SelectContent>
+                      <SelectItem value="public">
+                        <div className="flex items-center">
+                          <Globe2Icon className="size-4 mr-2" />
+                          Public
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="private">
+                        <div className="flex items-center">
+                          <LockIcon className="size-4 mr-2" />
+                          Private
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
         </div>
       </form>
