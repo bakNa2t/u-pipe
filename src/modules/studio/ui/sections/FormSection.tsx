@@ -5,13 +5,17 @@ import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import Image from "next/image";
 import { ErrorBoundary } from "react-error-boundary";
 import {
   CopyCheckIcon,
   CopyIcon,
   Globe2Icon,
+  ImagePlusIcon,
   LockIcon,
   MoreVerticalIcon,
+  RotateCcwIcon,
+  SparkleIcon,
   TrashIcon,
 } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,6 +51,8 @@ import { VideoPlayer } from "@/modules/videos/ui/components/VideoPlayer";
 
 import { videoUpdateSchema } from "@/db/schema";
 import { snakeCaseToTitle } from "@/lib/utils";
+
+import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
 
 interface FormSectionProps {
   videoId: string;
@@ -190,6 +196,53 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   </FormControl>
 
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name="thumbnailUrl"
+              control={form.control}
+              render={() => (
+                <FormItem>
+                  <FormLabel>Thumbnail</FormLabel>
+                  <FormControl>
+                    <div className="relative w-[153px] h-[84px] p-0.5 border border-dashed border-border border-neutral-500 group">
+                      <Image
+                        src={video.thumbnailUrl || THUMBNAIL_FALLBACK}
+                        fill
+                        alt="thumbnail"
+                        className="object-cover"
+                      />
+
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            type="button"
+                            size="icon"
+                            className="absolute top-1 right-1 bg-black/50 hover:bg-black/50 rounded-full opacity-100 md:opacity-0 group-hover:opacity-100 duration-300 size-7"
+                          >
+                            <MoreVerticalIcon className="text-white" />
+                          </Button>
+                        </DropdownMenuTrigger>
+
+                        <DropdownMenuContent align="start" side="right">
+                          <DropdownMenuItem>
+                            <ImagePlusIcon className="size-4 mr-1" />
+                            Change
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <SparkleIcon className="size-4 mr-1" />
+                            Ai-generated
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <RotateCcwIcon className="size-4 mr-1" />
+                            Restore
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </FormControl>
                 </FormItem>
               )}
             />
