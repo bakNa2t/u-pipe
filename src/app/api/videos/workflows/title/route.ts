@@ -1,7 +1,7 @@
 import { serve } from "@upstash/workflow/nextjs";
+import { and, eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { and, eq } from "drizzle-orm";
 import { videos } from "@/db/schema";
 
 interface InputType {
@@ -13,7 +13,7 @@ export const { POST } = serve(async (context) => {
   const input = context.requestPayload as InputType;
   const { userId, videoId } = input;
 
-  const video = context.run("get-video", async () => {
+  const video = await context.run("get-video", async () => {
     const [existingVideo] = await db
       .select()
       .from(videos)
@@ -26,13 +26,12 @@ export const { POST } = serve(async (context) => {
     return existingVideo;
   });
 
-  console.log(video);
-
-  await context.run("initial-step", () => {
-    console.log("initial step ran");
-  });
-
-  await context.run("second-step", () => {
-    console.log("second step ran");
+  await context.run("update-video", async () => {
+    await db
+      .update(videos)
+      .set({
+        title: "Updated from background job",
+      })
+      .where(and(eq(videos.id, video.id), eq(videos.userId, video.userId)));
   });
 });
