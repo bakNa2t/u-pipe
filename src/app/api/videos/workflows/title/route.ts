@@ -37,6 +37,19 @@ export const { POST } = serve(async (context) => {
     return existingVideo;
   });
 
+  const transcript = await context.run("get-transcript", async () => {
+    const trackUrl = `https://stream.mux.com/${video.muxPlaybackId}/text/${video.muxTrackId}.txt`;
+    const response = await fetch(trackUrl);
+    const text = response.text();
+
+    if (!text) {
+      throw new Error("Failed to get transcript");
+    }
+
+    return text;
+  });
+
+  // openai generate title call
   const { body } = await context.api.openai.call("generate-title", {
     token: process.env.OPENAI_API_KEY!,
     operation: "chat.completions.create",
@@ -49,13 +62,17 @@ export const { POST } = serve(async (context) => {
         },
         {
           role: "user",
-          content: "Hello there, here we try to build youtube clone",
+          content: transcript,
         },
       ],
     },
   });
 
   const title = body.choices[0]?.message.content;
+
+  if (!title) {
+    throw new Error("Failed to generate title");
+  }
 
   await context.run("update-video", async () => {
     await db
