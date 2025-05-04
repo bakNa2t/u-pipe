@@ -12,10 +12,12 @@ import {
   CopyIcon,
   Globe2Icon,
   ImagePlusIcon,
+  Loader2Icon,
   LockIcon,
   MoreVerticalIcon,
   RotateCcwIcon,
   SparkleIcon,
+  SparklesIcon,
   TrashIcon,
 } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -98,6 +100,17 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     },
     onError: () => {
       toast.error("Failed to update video");
+    },
+  });
+
+  const generateTitle = trpc.videos.generateThumbnail.useMutation({
+    onSuccess: () => {
+      toast.success("Background job started", {
+        description: "This may take a few minutes",
+      });
+    },
+    onError: () => {
+      toast.error("Failed to generate thumbnail");
     },
   });
 
@@ -196,7 +209,25 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center">
+                        Title
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          type="button"
+                          className="size-6 rounded-full [&_svg]:size-3"
+                          onClick={() => generateTitle.mutate({ id: videoId })}
+                          disabled={generateTitle.isPending}
+                        >
+                          {generateTitle.isPending ? (
+                            <Loader2Icon className="animate-spin" />
+                          ) : (
+                            <SparklesIcon />
+                          )}
+                        </Button>
+                      </div>
+                    </FormLabel>
 
                     <FormControl>
                       <Input
