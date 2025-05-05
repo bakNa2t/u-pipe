@@ -2,6 +2,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { trpc } from "@/trpc/client";
+import { toast } from "sonner";
 
 import {
   Form,
@@ -37,17 +38,28 @@ export const StudioThumbnailGenerateModal = ({
     },
   });
 
-  const utils = trpc.useUtils();
+  const generateThumbnail = trpc.videos.generateThumbnail.useMutation({
+    onSuccess: () => {
+      toast.success("Background job started", {
+        description: "This may take a few minutes",
+      });
+    },
+    onError: () => {
+      toast.error("Failed to generate thumbnail");
+    },
+  });
 
-  const onSubmit = () => {
-    utils.studio.getMany.invalidate();
-    utils.studio.getOne.invalidate({ id: videoId });
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    generateThumbnail.mutate({
+      prompt: values.prompt,
+      id: videoId,
+    });
     onOpenChange(false);
   };
 
   return (
     <ResponsiveModal
-      title="Upload a thumbnail"
+      title="Generate a thumbnail"
       open={open}
       onOpenChange={onOpenChange}
     >
@@ -70,16 +82,16 @@ export const StudioThumbnailGenerateModal = ({
                     rows={5}
                     placeholder="Enter a prompt to generate a thumbnail"
                   />
-                  <FormMessage />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
-        </form>
 
-        <div className="flex justify-end">
-          <Button type="submit">Generate</Button>
-        </div>
+          <div className="flex justify-end">
+            <Button type="submit">Generate</Button>
+          </div>
+        </form>
       </Form>
     </ResponsiveModal>
   );
