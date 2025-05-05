@@ -51,6 +51,7 @@ import { Button } from "@/components/ui/button";
 
 import { VideoPlayer } from "@/modules/videos/ui/components/VideoPlayer";
 import { StudioThumbnailUploadModal } from "../components/StudioThumbnailUploadModal";
+import { StudioThumbnailGenerateModal } from "../components/StudioThumbnailGenerateModal";
 
 import { videoUpdateSchema } from "@/db/schema";
 import { snakeCaseToTitle } from "@/lib/utils";
@@ -75,6 +76,8 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const router = useRouter();
   const utils = trpc.useUtils();
   const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false);
+  const [thumbnailGenerateModalOpen, setThumbnailGenerateModalOpen] =
+    useState(false);
 
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
@@ -125,17 +128,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     },
   });
 
-  const generateThumbnail = trpc.videos.generateThumbnail.useMutation({
-    onSuccess: () => {
-      toast.success("Background job started", {
-        description: "This may take a few minutes",
-      });
-    },
-    onError: () => {
-      toast.error("Failed to generate thumbnail");
-    },
-  });
-
   const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
     onSuccess: () => {
       utils.studio.getMany.invalidate();
@@ -171,11 +163,18 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
   return (
     <>
+      <StudioThumbnailGenerateModal
+        open={thumbnailGenerateModalOpen}
+        onOpenChange={setThumbnailGenerateModalOpen}
+        videoId={videoId}
+      />
+
       <StudioThumbnailUploadModal
         open={thumbnailModalOpen}
         onOpenChange={setThumbnailModalOpen}
         videoId={videoId}
       />
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {/* Header block */}
@@ -335,7 +334,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={() =>
-                                generateThumbnail.mutate({ id: videoId })
+                                setThumbnailGenerateModalOpen(true)
                               }
                             >
                               <SparkleIcon className="size-4 mr-1" />
