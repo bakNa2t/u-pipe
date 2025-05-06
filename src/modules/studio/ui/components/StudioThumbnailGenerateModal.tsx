@@ -43,6 +43,8 @@ export const StudioThumbnailGenerateModal = ({
       toast.success("Background job started", {
         description: "This may take a few minutes",
       });
+      form.reset();
+      onOpenChange(false);
     },
     onError: () => {
       toast.error("Failed to generate thumbnail");
