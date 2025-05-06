@@ -48,6 +48,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { VideoPlayer } from "@/modules/videos/ui/components/VideoPlayer";
 import { StudioThumbnailUploadModal } from "../components/StudioThumbnailUploadModal";
@@ -64,11 +65,76 @@ interface FormSectionProps {
 
 export const FormSection = ({ videoId }: FormSectionProps) => {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<FormSectionSkeleton />}>
       <ErrorBoundary fallback={<p>Error</p>}>
         <FormSectionSuspense videoId={videoId} />
       </ErrorBoundary>
     </Suspense>
+  );
+};
+
+const FormSectionSkeleton = () => {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div className="space-y-2">
+          <Skeleton className="w-32 h-7" />
+          <Skeleton className="w-40 h-4" />
+        </div>
+        <Skeleton className="w-24 h-9" />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="space-y-8 lg:col-span-3">
+          <div className="space-y-2">
+            <Skeleton className="w-16 h-5" />
+            <Skeleton className="w-full h-10" />
+          </div>
+
+          <div className="space-y-2">
+            <Skeleton className="w-24 h-5" />
+            <Skeleton className="w-full h-[220px]" />
+          </div>
+
+          <div className="space-y-2">
+            <Skeleton className="w-20 h-5" />
+            <Skeleton className="w-[153px] h-[83px]" />
+          </div>
+
+          <div className="space-y-2">
+            <Skeleton className="w-10 h-5" />
+            <Skeleton className="w-full h-10" />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-y-8 lg:col-span-2">
+          <div className="flex flex-col gap-4 bg-[#f9f9f9] rounded-xl overflow-hidden h-fit">
+            <Skeleton className="aspect-video" />
+
+            <div className="p-4 space-y-6">
+              <div className="space-y-2">
+                <Skeleton className="w-20 h-4" />
+                <Skeleton className="w-full h-5" />
+              </div>
+
+              <div className="space-y-2">
+                <Skeleton className="w-24 h-4" />
+                <Skeleton className="w-32 h-5" />
+              </div>
+
+              <div className="space-y-2">
+                <Skeleton className="w-24 h-4" />
+                <Skeleton className="w-32 h-5" />
+              </div>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="w-20 h-5" />
+            <Skeleton className="w-full h-10" />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -187,7 +253,10 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
             </div>
 
             <div className="flex items-center gap-x-2">
-              <Button type="submit" disabled={update.isPending}>
+              <Button
+                type="submit"
+                disabled={update.isPending || form.formState.isDirty}
+              >
                 Save
               </Button>
 
