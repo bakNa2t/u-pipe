@@ -4,6 +4,7 @@ import { useAuth } from "@clerk/nextjs";
 import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
 
+import { UserInfo } from "@/modules/users/ui/components/UserInfo";
 import { SubscriptionButton } from "@/modules/subscriptions/ui/components/SubscriptionButton";
 
 import { VideoGetOneOutput } from "../../types";
@@ -21,6 +22,7 @@ export const VideoOwner = ({ user, videoId }: VideoOwnerProps) => {
       <Link href={`/users/${user.id}`}>
         <div className="flex items-center gap-3 min-w-0">
           <UserAvatar imageUrl={user.imageUrl} name={user.name} size="lg" />
+          <UserInfo size="lg" name={user.name} />
           <span className="text-sm text-muted-foreground line-clamp-1">
             {0} subscribers
           </span>
