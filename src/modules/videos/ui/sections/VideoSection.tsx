@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 import { VideoPlayer } from "../components/VideoPlayer";
 import { VideoBanner } from "../components/VideoBanner";
+import { VideoTopRow } from "../components/VideoTopRow";
 
 interface VideoSectionProps {
   videoId: string;
@@ -43,6 +44,7 @@ const VideoSectionSuspense = ({ videoId }: VideoSectionProps) => {
       </div>
 
       <VideoBanner status={video.muxStatus} />
+      <VideoTopRow video={video} />
     </>
   );
 };
