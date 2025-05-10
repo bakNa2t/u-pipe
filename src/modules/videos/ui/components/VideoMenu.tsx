@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface VideoMenuProps {
   videoId: string;
@@ -20,6 +21,15 @@ interface VideoMenuProps {
 }
 
 export const VideoMenu = ({ videoId, variant, onRemove }: VideoMenuProps) => {
+  const onShare = () => {
+    const fullUrl = `${
+      process.env.VERCEL_URL || `http://localhost:3000/videos/${videoId}`
+    }`;
+
+    navigator.clipboard.writeText(fullUrl);
+    toast.success("Link copied to the clipboard");
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,7 +39,7 @@ export const VideoMenu = ({ videoId, variant, onRemove }: VideoMenuProps) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
-        <DropdownMenuItem onClick={() => {}}>
+        <DropdownMenuItem onClick={onShare}>
           <ShareIcon className="size-4 mr-2" />
           Share
         </DropdownMenuItem>
@@ -39,10 +49,12 @@ export const VideoMenu = ({ videoId, variant, onRemove }: VideoMenuProps) => {
           Add to playlist
         </DropdownMenuItem>
 
-        <DropdownMenuItem onClick={() => {}}>
-          <Trash2Icon className="size-4 mr-2" />
-          Remove
-        </DropdownMenuItem>
+        {onRemove && (
+          <DropdownMenuItem onClick={() => {}}>
+            <Trash2Icon className="size-4 mr-2" />
+            Remove
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
