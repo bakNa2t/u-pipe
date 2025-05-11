@@ -1,5 +1,7 @@
-import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
 
 interface VideoDescriptionProps {
   compactViews: string;
@@ -16,10 +18,13 @@ export const VideoDescription = ({
   expandedDate,
   description,
 }: VideoDescriptionProps) => {
-  const [isExpanded, seIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="bg-secondary/50 rounded-xl p-3 cursor-pointer hover:bg-secondary/70 transition">
+    <div
+      className="bg-secondary/50 rounded-xl p-3 cursor-pointer hover:bg-secondary/70 transition"
+      onClick={() => setIsExpanded((current) => !current)}
+    >
       <div className="flex gap-2 text-sm mb-2">
         <span className="font-medium">
           {isExpanded ? expandedViews : compactViews} views
@@ -38,6 +43,18 @@ export const VideoDescription = ({
         >
           {description || "No description"}
         </p>
+
+        <div className="flex items-center gap-1 mt-4 text-sm font-medium">
+          {isExpanded ? (
+            <>
+              Show less <ChevronUpIcon className="size-4" />
+            </>
+          ) : (
+            <>
+              Show more <ChevronDownIcon className="size-4" />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
