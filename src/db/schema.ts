@@ -15,6 +15,7 @@ import {
   createUpdateSchema,
 } from "drizzle-zod";
 
+// Users schema
 export const users = pgTable(
   "users",
   {
@@ -32,8 +33,10 @@ export const users = pgTable(
 export const userRelations = relations(users, ({ many }) => ({
   videos: many(videos),
   videoViews: many(videoViews),
+  videoReactions: many(videoReactions),
 }));
 
+// Categories schema
 export const categories = pgTable(
   "categories",
   {
@@ -50,6 +53,7 @@ export const categoryRelations = relations(categories, ({ many }) => ({
   videos: many(videos),
 }));
 
+// Videos schema
 export const videosVisibility = pgEnum("videos_visibility", [
   "private",
   "public",
@@ -97,8 +101,10 @@ export const videoRelations = relations(videos, ({ one, many }) => ({
     references: [categories.id],
   }),
   views: many(videoViews),
+  reactions: many(videoReactions),
 }));
 
+// Video views schema
 export const videoViews = pgTable(
   "video_views",
   {
@@ -134,6 +140,7 @@ export const videoViewSelectSchema = createSelectSchema(videoViews);
 export const videoViewInsertSchema = createInsertSchema(videoViews);
 export const videoViewUpdateSchema = createUpdateSchema(videoViews);
 
+// Video reactions schema
 export const reactionType = pgEnum("reaction_type", ["like", "dislike"]);
 
 export const videoReactions = pgTable(
