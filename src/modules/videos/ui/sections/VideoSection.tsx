@@ -7,9 +7,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 
-import { VideoPlayer } from "../components/VideoPlayer";
 import { VideoBanner } from "../components/VideoBanner";
-import { VideoTopRow } from "../components/VideoTopRow";
+import { VideoPlayer, VideoPlayerSkeleton } from "../components/VideoPlayer";
+import { VideoTopRow, VideoTopRowSkeleton } from "../components/VideoTopRow";
 
 interface VideoSectionProps {
   videoId: string;
@@ -17,11 +17,20 @@ interface VideoSectionProps {
 
 export const VideoSection = ({ videoId }: VideoSectionProps) => {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<VideoSectionSkeleton />}>
       <ErrorBoundary fallback={<p>Error...</p>}>
         <VideoSectionSuspense videoId={videoId} />
       </ErrorBoundary>
     </Suspense>
+  );
+};
+
+const VideoSectionSkeleton = () => {
+  return (
+    <>
+      <VideoPlayerSkeleton />
+      <VideoTopRowSkeleton />
+    </>
   );
 };
 
