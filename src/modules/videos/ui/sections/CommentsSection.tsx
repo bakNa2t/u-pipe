@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { CommentForm } from "@/modules/comments/ui/components/CommentForm";
+import { CommentItem } from "@/modules/comments/ui/components/CommentItem";
 
 import { trpc } from "@/trpc/client";
 
@@ -22,14 +23,19 @@ export const CommentsSection = ({ videoId }: CommentsSectionProps) => {
 };
 
 const CommentsSectionSuspense = ({ videoId }: CommentsSectionProps) => {
-  const [commnets] = trpc.comments.getManu.useSuspenseQuery({ videoId });
-  console.log(commnets);
+  const [comments] = trpc.comments.getManu.useSuspenseQuery({ videoId });
 
   return (
     <div className="mt-6 ">
       <div className="flex flex-col gap-6">
         <h1>0 comments</h1>
         <CommentForm videoId={videoId} onSuccess={() => {}} />
+      </div>
+
+      <div className="flex flex-col gap-4 mt-2">
+        {comments.map((comment) => (
+          <CommentItem key={comment.id} comment={comment} />
+        ))}
       </div>
     </div>
   );
