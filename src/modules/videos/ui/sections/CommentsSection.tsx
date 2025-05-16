@@ -23,7 +23,7 @@ export const CommentsSection = ({ videoId }: CommentsSectionProps) => {
 };
 
 const CommentsSectionSuspense = ({ videoId }: CommentsSectionProps) => {
-  const [comments] = trpc.comments.getManu.useSuspenseQuery({ videoId });
+  const [comments] = trpc.comments.getMany.useSuspenseQuery({ videoId });
 
   return (
     <div className="mt-6 ">

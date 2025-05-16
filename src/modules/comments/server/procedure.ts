@@ -28,7 +28,7 @@ export const commentsRouter = createTRPCRouter({
 
       return createdComment;
     }),
-  getManu: baseProcedure
+  getMany: baseProcedure
     .input(
       z.object({
         videoId: z.string().uuid(),
