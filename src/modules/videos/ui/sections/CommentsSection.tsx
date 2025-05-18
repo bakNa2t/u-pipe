@@ -2,6 +2,7 @@
 
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { Loader2Icon } from "lucide-react";
 
 import { CommentForm } from "@/modules/comments/ui/components/CommentForm";
 import { CommentItem } from "@/modules/comments/ui/components/CommentItem";
@@ -17,11 +18,19 @@ interface CommentsSectionProps {
 
 export const CommentsSection = ({ videoId }: CommentsSectionProps) => {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<CommentSectionSkeleton />}>
       <ErrorBoundary fallback={<p>Error...</p>}>
         <CommentsSectionSuspense videoId={videoId} />
       </ErrorBoundary>
     </Suspense>
+  );
+};
+
+const CommentSectionSkeleton = () => {
+  return (
+    <div className="flex items-center justify-center mt-6">
+      <Loader2Icon className="size-7 animate-spin text-muted-foreground" />
+    </div>
   );
 };
 
@@ -36,7 +45,9 @@ const CommentsSectionSuspense = ({ videoId }: CommentsSectionProps) => {
   return (
     <div className="mt-6 ">
       <div className="flex flex-col gap-6">
-        <h1>0 comments</h1>
+        <h1 className="text-xl font-bold">
+          {comments.pages[0].totalCount} comments
+        </h1>
         <CommentForm videoId={videoId} onSuccess={() => {}} />
       </div>
 
