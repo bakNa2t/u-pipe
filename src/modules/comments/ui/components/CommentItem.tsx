@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, useClerk } from "@clerk/nextjs";
 import { MessageSquareIcon, MoreVerticalIcon, Trash2Icon } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
+import { toast } from "sonner";
 
 import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { trpc } from "@/trpc/client";
 import { CommentsGetManyOutput } from "../../types";
 
 interface CommentItemProps {
@@ -19,7 +21,23 @@ interface CommentItemProps {
 }
 
 export const CommentItem = ({ comment }: CommentItemProps) => {
+  const clerk = useClerk();
   const { userId } = useAuth();
+
+  const utils = trpc.useUtils();
+  const remove = trpc.comments.remove.useMutation({
+    onSuccess: () => {
+      toast.success("Comment deleted");
+      utils.comments.getMany.invalidate({ videoId: comment.videoId });
+    },
+    onError: (error) => {
+      toast.error("Something went wrong");
+
+      if (error.data?.code === "UNAUTHORIZED") {
+        clerk.openSignIn();
+      }
+    },
+  });
 
   return (
     <div>
@@ -50,7 +68,7 @@ export const CommentItem = ({ comment }: CommentItemProps) => {
           <p className="text-sm">{comment.value}</p>
         </div>
 
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="size-8">
               <MoreVerticalIcon />
@@ -64,7 +82,9 @@ export const CommentItem = ({ comment }: CommentItemProps) => {
             </DropdownMenuItem>
 
             {comment.user.clerkId === userId && (
-              <DropdownMenuItem onClick={() => {}}>
+              <DropdownMenuItem
+                onClick={() => remove.mutate({ id: comment.id })}
+              >
                 <Trash2Icon className="size-4" />
                 Delete
               </DropdownMenuItem>
