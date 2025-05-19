@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { useAuth, useClerk } from "@clerk/nextjs";
-import { MessageSquareIcon, MoreVerticalIcon, Trash2Icon } from "lucide-react";
+import {
+  MessageSquareIcon,
+  MoreVerticalIcon,
+  ThumbsDownIcon,
+  ThumbsUpIcon,
+  Trash2Icon,
+} from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { toast } from "sonner";
 
@@ -13,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 import { CommentsGetManyOutput } from "../../types";
 
@@ -66,6 +73,36 @@ export const CommentItem = ({ comment }: CommentItemProps) => {
           </Link>
 
           <p className="text-sm">{comment.value}</p>
+
+          <div className="flex items-center gap-2 mt-1">
+            <div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-8"
+                onClick={() => {}}
+                disabled={false}
+              >
+                <ThumbsUpIcon className={cn()} />
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                {comment.likeCount}
+              </span>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-8"
+                onClick={() => {}}
+                disabled={false}
+              >
+                <ThumbsDownIcon className={cn()} />
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                {comment.dislikeCount}
+              </span>
+            </div>
+          </div>
         </div>
 
         <DropdownMenu modal={false}>
