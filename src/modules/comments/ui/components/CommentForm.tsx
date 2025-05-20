@@ -20,10 +20,19 @@ import { commentInsertSchema } from "@/db/schema";
 
 interface CommentFormProps {
   videoId: string;
+  parentId?: string;
   onSuccess?: () => void;
+  onCancel?: () => void;
+  variant: "comment" | "reply";
 }
 
-export const CommentForm = ({ videoId, onSuccess }: CommentFormProps) => {
+export const CommentForm = ({
+  videoId,
+  parentId,
+  onSuccess,
+  onCancel,
+  variant = "comment",
+}: CommentFormProps) => {
   const { user } = useUser();
   const clerk = useClerk();
   const utils = trpc.useUtils();
@@ -48,13 +57,19 @@ export const CommentForm = ({ videoId, onSuccess }: CommentFormProps) => {
   const form = useForm<z.infer<typeof commentInsertSchema>>({
     resolver: zodResolver(commentInsertSchema.omit({ userId: true })),
     defaultValues: {
-      videoId,
+      videoId: videoId,
+      parentId: parentId,
       value: "",
     },
   });
 
   const handleSubmit = (values: z.infer<typeof commentInsertSchema>) => {
     create.mutate(values);
+  };
+
+  const handleCancel = () => {
+    form.reset();
+    onCancel?.();
   };
 
   return (
@@ -78,7 +93,11 @@ export const CommentForm = ({ videoId, onSuccess }: CommentFormProps) => {
                 <FormControl>
                   <Textarea
                     {...field}
-                    placeholder="Add a comment..."
+                    placeholder={
+                      variant === "reply"
+                        ? "Reply to this comment..."
+                        : "Add a comment..."
+                    }
                     className="resize-none bg-transparent overflow-hidden min-h-0"
                   />
                 </FormControl>
@@ -88,8 +107,14 @@ export const CommentForm = ({ videoId, onSuccess }: CommentFormProps) => {
           />
 
           <div className="flex justify-end gap-2 mt-2">
+            {onCancel && (
+              <Button variant="ghost" type="button" onClick={handleCancel}>
+                Cancel
+              </Button>
+            )}
+
             <Button type="submit" size="sm" disabled={create.isPending}>
-              Comment
+              {variant === "reply" ? "Reply" : "Comment"}
             </Button>
           </div>
         </div>
