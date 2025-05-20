@@ -25,13 +25,18 @@ import { CommentsGetManyOutput } from "../../types";
 
 interface CommentItemProps {
   comment: CommentsGetManyOutput["items"][number];
+  variant?: "comment" | "reply";
 }
 
-export const CommentItem = ({ comment }: CommentItemProps) => {
+export const CommentItem = ({
+  comment,
+  variant = "comment",
+}: CommentItemProps) => {
   const clerk = useClerk();
   const { userId } = useAuth();
 
   const utils = trpc.useUtils();
+
   const remove = trpc.comments.remove.useMutation({
     onSuccess: () => {
       toast.success("Comment deleted");
@@ -99,7 +104,7 @@ export const CommentItem = ({ comment }: CommentItemProps) => {
 
           <p className="text-sm">{comment.value}</p>
 
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex items-center gap-3 mt-1">
             <div>
               <Button
                 variant="ghost"
@@ -135,6 +140,17 @@ export const CommentItem = ({ comment }: CommentItemProps) => {
                 {comment.dislikeCount}
               </span>
             </div>
+
+            {variant === "comment" && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="size-8"
+                onClick={() => {}}
+              >
+                Reply
+              </Button>
+            )}
           </div>
         </div>
 
