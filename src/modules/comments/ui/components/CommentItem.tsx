@@ -22,6 +22,8 @@ import {
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 import { CommentsGetManyOutput } from "../../types";
+import { useState } from "react";
+import { CommentForm } from "./CommentForm";
 
 interface CommentItemProps {
   comment: CommentsGetManyOutput["items"][number];
@@ -34,6 +36,9 @@ export const CommentItem = ({
 }: CommentItemProps) => {
   const clerk = useClerk();
   const { userId } = useAuth();
+
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const [isRepliesOpen, setIsRepliesOpen] = useState(false);
 
   const utils = trpc.useUtils();
 
@@ -146,7 +151,7 @@ export const CommentItem = ({
                 variant="ghost"
                 size="sm"
                 className="size-8"
-                onClick={() => {}}
+                onClick={() => setIsReplyOpen(true)}
               >
                 Reply
               </Button>
@@ -162,10 +167,12 @@ export const CommentItem = ({
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => {}}>
-              <MessageSquareIcon className="size-4" />
-              Reply
-            </DropdownMenuItem>
+            {variant === "comment" && (
+              <DropdownMenuItem onClick={() => setIsReplyOpen(true)}>
+                <MessageSquareIcon className="size-4" />
+                Reply
+              </DropdownMenuItem>
+            )}
 
             {comment.user.clerkId === userId && (
               <DropdownMenuItem
@@ -178,6 +185,21 @@ export const CommentItem = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      {isReplyOpen && variant === "comment" && (
+        <div className="mt-4 pl-14">
+          <CommentForm
+            videoId={comment.videoId}
+            parentId={comment.id}
+            variant="reply"
+            onSuccess={() => {
+              setIsReplyOpen(false);
+              setIsRepliesOpen(true);
+            }}
+            onCancel={() => setIsReplyOpen(false)}
+          />
+        </div>
+      )}
     </div>
   );
 };
