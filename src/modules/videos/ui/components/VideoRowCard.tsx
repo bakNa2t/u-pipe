@@ -2,8 +2,9 @@ import Link from "next/link";
 import { cva, VariantProps } from "class-variance-authority";
 
 import { UserAvatar } from "@/components/user-avatar";
-import { VideoThumbnail } from "./VideoThumbnail";
 import { UserInfo } from "@/modules/users/ui/components/UserInfo";
+import { VideoMenu } from "./VideoMenu";
+import { VideoThumbnail } from "./VideoThumbnail";
 import {
   Tooltip,
   TooltipContent,
@@ -102,7 +103,19 @@ export const VideoRowCard = ({ data, size, onRemove }: VideoRowCardProps) => {
                 </Tooltip>
               </>
             )}
+
+            {size === "compact" && <UserInfo size="sm" name={data.user.name} />}
+
+            {size === "compact" && (
+              <p className="text-sm text-muted-foreground mt-1">
+                {data.viewCount} views &bull; {data.likeCount} likes
+              </p>
+            )}
           </Link>
+
+          <div className="flex-none">
+            <VideoMenu videoId={data.id} onRemove={onRemove} />
+          </div>
         </div>
       </div>
     </div>
