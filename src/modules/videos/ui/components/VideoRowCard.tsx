@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useMemo } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 
 import { UserAvatar } from "@/components/user-avatar";
@@ -44,6 +45,18 @@ interface VideoRowCardProps extends VariantProps<typeof videoRowCardVariants> {
 }
 
 export const VideoRowCard = ({ data, size, onRemove }: VideoRowCardProps) => {
+  const compactViews = useMemo(() => {
+    return Intl.NumberFormat("en", {
+      notation: "compact",
+    }).format(data.viewCount);
+  }, [data.viewCount]);
+
+  const compactLikes = useMemo(() => {
+    return Intl.NumberFormat("en", {
+      notation: "compact",
+    }).format(data.likeCount);
+  }, [data.likeCount]);
+
   return (
     <div className={videoRowCardVariants({ size })}>
       <Link href={`/videos/${data.id}`} className={thumbnailVariants({ size })}>
@@ -70,7 +83,7 @@ export const VideoRowCard = ({ data, size, onRemove }: VideoRowCardProps) => {
 
             {size === "default" && (
               <p className="text-sm text-muted-foreground mt-1">
-                {data.viewCount} views &bull; {data.likeCount} likes
+                {compactViews} views &bull; {compactLikes} likes
               </p>
             )}
 
@@ -108,7 +121,7 @@ export const VideoRowCard = ({ data, size, onRemove }: VideoRowCardProps) => {
 
             {size === "compact" && (
               <p className="text-sm text-muted-foreground mt-1">
-                {data.viewCount} views &bull; {data.likeCount} likes
+                {compactViews} views &bull; {compactLikes} likes
               </p>
             )}
           </Link>
