@@ -1,7 +1,9 @@
 "use client";
 
-import { trpc } from "@/trpc/client";
+import { VideoRowCard } from "../components/VideoRowCard";
+import { VideoGridCard } from "../components/VideoGridCard";
 
+import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
 
 interface SuggestionsSectionProps {
@@ -19,5 +21,24 @@ export const SuggestionsSection = ({ videoId }: SuggestionsSectionProps) => {
     }
   );
 
-  return <div>Suggestions</div>;
+  return (
+    <>
+      <div className="hidden md:block space-y-3">
+        {suggestions.pages.flatMap((page) =>
+          page.items.map((video) => (
+            <VideoRowCard key={video.id} data={video} size="compact" />
+          ))
+        )}
+      </div>
+
+      <div className="block md:hidden space-y-10">
+        {suggestions.pages.flatMap((page) =>
+          page.items.map((video) => (
+            <VideoGridCard key={video.id} data={video} />
+            // <VideoRowCard key={video.id} data={video} size="compact" />
+          ))
+        )}
+      </div>
+    </>
+  );
 };
