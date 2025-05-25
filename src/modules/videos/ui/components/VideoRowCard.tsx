@@ -11,6 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { cn } from "@/lib/utils";
 import { VideoGetManyOutput } from "../../types";
@@ -43,6 +44,14 @@ interface VideoRowCardProps extends VariantProps<typeof videoRowCardVariants> {
   data: VideoGetManyOutput["items"][number];
   onRemove?: () => void;
 }
+
+export const VideoRowCardSkeleton = () => {
+  return (
+    <div>
+      <Skeleton />
+    </div>
+  );
+};
 
 export const VideoRowCard = ({ data, size, onRemove }: VideoRowCardProps) => {
   const compactViews = useMemo(() => {
