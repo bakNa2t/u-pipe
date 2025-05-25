@@ -168,7 +168,18 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
       router.push("/studio");
     },
     onError: () => {
-      toast.error("Failed to update video");
+      toast.error("Failed to remove video");
+    },
+  });
+
+  const revalidate = trpc.videos.revalidate.useMutation({
+    onSuccess: () => {
+      utils.studio.getMany.invalidate();
+      utils.studio.getOne.invalidate({ id: videoId });
+      toast.success("Video revalitated");
+    },
+    onError: () => {
+      toast.error("Failed to revalitate video");
     },
   });
 
@@ -268,6 +279,12 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end">
+                  <DropdownMenuItem
+                    onClick={() => revalidate.mutate({ id: videoId })}
+                  >
+                    <RotateCcwIcon className="size-4 mr-2" />
+                    Revalidate
+                  </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => remove.mutate({ id: videoId })}
                   >
