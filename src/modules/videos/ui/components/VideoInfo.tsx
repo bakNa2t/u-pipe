@@ -4,6 +4,7 @@ import { formatDistanceToNow } from "date-fns";
 
 import { UserAvatar } from "@/components/user-avatar";
 import { UserInfo } from "@/modules/users/ui/components/UserInfo";
+import { Skeleton } from "@/components/ui/skeleton";
 import { VideoMenu } from "./VideoMenu";
 
 import { VideoGetManyOutput } from "../../types";
@@ -12,6 +13,18 @@ interface VideoInfoProps {
   data: VideoGetManyOutput["items"][number];
   onRemove?: () => void;
 }
+
+export const VideoInfoSkeleton = () => {
+  return (
+    <div className="flex gap-3">
+      <Skeleton className="flex-shrink-0 rounded-full size-10" />
+      <div className="flex-1 min-w-0 space-y-1">
+        <Skeleton className="w-[90%] h-5" />
+        <Skeleton className="w-[70%] h-5" />
+      </div>
+    </div>
+  );
+};
 
 export const VideoInfo = ({ data, onRemove }: VideoInfoProps) => {
   const compactViews = useMemo(() => {
