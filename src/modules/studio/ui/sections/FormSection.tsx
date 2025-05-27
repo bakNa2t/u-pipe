@@ -57,6 +57,7 @@ import { StudioThumbnailGenerateModal } from "../components/StudioThumbnailGener
 import { videoUpdateSchema } from "@/db/schema";
 import { snakeCaseToTitle } from "@/lib/utils";
 
+import { APP_URL } from "@/constants";
 import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
 
 interface FormSectionProps {
@@ -225,9 +226,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     update.mutateAsync(data);
   };
 
-  const fullUrl = `${
-    process.env.VERCEL_URL || `http://localhost:3000/videos/${videoId}`
-  }`;
+  const fullUrl = `${APP_URL || `http://localhost:3000/videos/${videoId}`}`;
 
   const onCopy = async () => {
     await navigator.clipboard.writeText(fullUrl);
