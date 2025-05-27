@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { SearchIcon } from "lucide-react";
+import { SearchIcon, XIcon } from "lucide-react";
 
 import { APP_URL } from "@/constants";
+import { Button } from "@/components/ui/button";
 
 export const SearchInput = () => {
   const router = useRouter();
@@ -39,10 +40,23 @@ export const SearchInput = () => {
           placeholder="Search..."
           className="w-full pl-4 pr-12 py-2 rounded-l-full border focus:outline-none focus:border-violet-900"
         />
+
+        {value && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={() => setValue("")}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full"
+          >
+            <XIcon className="text-gray-500" />
+          </Button>
+        )}
       </div>
 
       <button
         type="submit"
+        disabled={!value.trim()}
         className="px-5 py-2.5 rounded-r-full bg-violet-900/40 border-l-0 hover:bg-violet-900/60 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <SearchIcon className="size-5" />
