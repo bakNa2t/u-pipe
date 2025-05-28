@@ -2,6 +2,7 @@
 
 import { trpc } from "@/trpc/client";
 
+import { InfiniteScroll } from "@/components/infinite-scroll";
 import { VideoGridCard } from "@/modules/videos/ui/components/VideoGridCard";
 import { VideoRowCard } from "@/modules/videos/ui/components/VideoRowCard";
 
@@ -15,7 +16,7 @@ interface ResultsSectionProps {
 
 export const ResultsSection = ({ query, categoryId }: ResultsSectionProps) => {
   const isMobile = useIsMobile();
-  const [results, resultQuery] = trpc.search.getMany.useSuspenseInfiniteQuery(
+  const [results, resultsQuery] = trpc.search.getMany.useSuspenseInfiniteQuery(
     {
       query,
       categoryId,
@@ -42,6 +43,11 @@ export const ResultsSection = ({ query, categoryId }: ResultsSectionProps) => {
             ))}
         </div>
       )}
+      <InfiniteScroll
+        hasNextPage={resultsQuery.hasNextPage}
+        isFetchingNextPage={resultsQuery.isFetchingNextPage}
+        fetchNextPage={resultsQuery.fetchNextPage}
+      />
     </>
   );
 };
