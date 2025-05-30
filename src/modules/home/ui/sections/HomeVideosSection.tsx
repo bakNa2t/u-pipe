@@ -7,6 +7,7 @@ import { VideoGridCard } from "@/modules/videos/ui/components/VideoGridCard";
 import { trpc } from "@/trpc/client";
 
 import { DEFAULT_LIMIT } from "@/constants";
+import { InfiniteScroll } from "@/components/infinite-scroll";
 
 interface HomeVideosSectionProps {
   categoryId?: string;
@@ -46,6 +47,12 @@ const HomeVideosSectionSuspense = ({ categoryId }: HomeVideosSectionProps) => {
             <VideoGridCard key={video.id} data={video} />
           ))}
       </div>
+
+      <InfiniteScroll
+        hasNextPage={query.hasNextPage}
+        isFetchingNextPage={query.isFetchingNextPage}
+        fetchNextPage={query.fetchNextPage}
+      />
     </div>
   );
 };
