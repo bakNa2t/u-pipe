@@ -3,11 +3,14 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { VideoGridCard } from "@/modules/videos/ui/components/VideoGridCard";
-import { trpc } from "@/trpc/client";
-
-import { DEFAULT_LIMIT } from "@/constants";
+import {
+  VideoGridCard,
+  VideoGridCardSkeleton,
+} from "@/modules/videos/ui/components/VideoGridCard";
 import { InfiniteScroll } from "@/components/infinite-scroll";
+
+import { trpc } from "@/trpc/client";
+import { DEFAULT_LIMIT } from "@/constants";
 
 interface HomeVideosSectionProps {
   categoryId?: string;
@@ -15,7 +18,7 @@ interface HomeVideosSectionProps {
 
 export const HomeVideosSection = ({ categoryId }: HomeVideosSectionProps) => {
   return (
-    <Suspense fallback={<HomeVideosSectionSkeleton />}>
+    <Suspense key={categoryId} fallback={<HomeVideosSectionSkeleton />}>
       <ErrorBoundary fallback={<p>Error</p>}>
         <HomeVideosSectionSuspense categoryId={categoryId} />
       </ErrorBoundary>
@@ -24,7 +27,13 @@ export const HomeVideosSection = ({ categoryId }: HomeVideosSectionProps) => {
 };
 
 const HomeVideosSectionSkeleton = () => {
-  return <div>Loading</div>;
+  return (
+    <div className="grid grid-cols-1 gap-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 [media(min-width:1920px)]:grid-cols-5 [media(min-width:2200px)]:grid-cols-6">
+      {Array.from({ length: 18 }).map((_, index) => (
+        <VideoGridCardSkeleton key={index} />
+      ))}
+    </div>
+  );
 };
 
 const HomeVideosSectionSuspense = ({ categoryId }: HomeVideosSectionProps) => {
