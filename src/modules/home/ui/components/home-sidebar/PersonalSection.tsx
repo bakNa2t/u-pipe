@@ -16,7 +16,7 @@ import {
 const menuItems = [
   {
     title: "History",
-    url: "/playlsts/history",
+    url: "/playlists/history",
     icon: HistoryIcon,
     auth: true,
   },
