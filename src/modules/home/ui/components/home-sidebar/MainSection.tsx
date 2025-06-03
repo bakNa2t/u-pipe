@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import { FlameIcon, HomeIcon, PlaySquareIcon } from "lucide-react";
 
@@ -33,6 +34,7 @@ const menuItems = [
 
 export const MainSection = () => {
   const clerkUser = useClerk();
+  const pathname = usePathname();
   const { isSignedIn } = useAuth();
 
   return (
@@ -44,7 +46,7 @@ export const MainSection = () => {
               <SidebarMenuButton
                 asChild
                 tooltip={item.title}
-                isActive={false}
+                isActive={pathname === item.url}
                 onClick={(e) => {
                   if (!isSignedIn && item.auth) {
                     e.preventDefault();
