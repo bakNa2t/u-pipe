@@ -45,6 +45,7 @@ export const userRelations = relations(users, ({ many }) => ({
   }),
   comments: many(comments),
   commentReactions: many(commentReactions),
+  playlists: many(playlists),
 }));
 
 // Subscriptions schema
@@ -148,6 +149,7 @@ export const videoRelations = relations(videos, ({ one, many }) => ({
   views: many(videoViews),
   reactions: many(videoReactions),
   comments: many(comments),
+  playlistVideos: many(playlistVideos),
 }));
 
 // Comments schema
@@ -322,6 +324,14 @@ export const playlists = pgTable("playlists", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+export const playlistsRelations = relations(playlists, ({ one, many }) => ({
+  user: one(users, {
+    fields: [playlists.userId],
+    references: [users.id],
+  }),
+  playlistVideos: many(playlistVideos),
+}));
+
 // Videos playlist schema
 export const playlistVideos = pgTable(
   "playlist_videos",
@@ -342,3 +352,14 @@ export const playlistVideos = pgTable(
     }),
   ]
 );
+
+export const playlistVideosRelations = relations(playlistVideos, ({ one }) => ({
+  playlist: one(playlists, {
+    fields: [playlistVideos.playlistId],
+    references: [playlists.id],
+  }),
+  video: one(videos, {
+    fields: [playlistVideos.videoId],
+    references: [videos.id],
+  }),
+}));
