@@ -1,7 +1,8 @@
+import Image from "next/image";
+import { ListVideoIcon, PlayIcon } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
-import { PlayIcon } from "lucide-react";
-import Image from "next/image";
 
 interface PlaylistThumbnailProps {
   title: string;
@@ -41,6 +42,12 @@ export const PlaylistThumbnail = ({
             <span className="text-white  font-medium">Play all</span>
           </div>
         </div>
+      </div>
+
+      {/* Video count */}
+      <div className="absolute bottom-2 right-2 flex items-center gap-x-1 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">
+        <ListVideoIcon className="size-4" />
+        {videoCount} videos
       </div>
     </div>
   );
