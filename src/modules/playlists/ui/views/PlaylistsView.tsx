@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PlusIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { PlaylistsSection } from "../sections/PlaylistsSection";
 import { PlaylistCreateModal } from "../components/PlaylistCreateModal";
 
 export const PlaylistsView = () => {
@@ -33,6 +34,8 @@ export const PlaylistsView = () => {
           <PlusIcon />
         </Button>
       </div>
+
+      <PlaylistsSection />
     </div>
   );
 };
