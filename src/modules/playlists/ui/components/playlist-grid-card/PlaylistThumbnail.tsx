@@ -1,5 +1,8 @@
 import Image from "next/image";
+import { useMemo } from "react";
 import { ListVideoIcon, PlayIcon } from "lucide-react";
+
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { cn } from "@/lib/utils";
 import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
@@ -11,14 +14,28 @@ interface PlaylistThumbnailProps {
   className?: string;
 }
 
+export const PlaylistThumbnailSkeleton = () => {
+  return (
+    <div className="relative w-full overflow-hidden rounded-xl aspect-video">
+      <Skeleton className="size-full" />
+    </div>
+  );
+};
+
 export const PlaylistThumbnail = ({
   title,
   videoCount,
   imageUrl,
   className,
 }: PlaylistThumbnailProps) => {
+  const compactViews = useMemo(() => {
+    return Intl.NumberFormat("en", {
+      notation: "compact",
+    }).format(videoCount);
+  }, [videoCount]);
+
   return (
-    <div className={cn("relative pt-3 group", className)}>
+    <div className={cn("relative pt-3", className)}>
       {/* Stack effect */}
       <div className="relative">
         {/* Background layers */}
@@ -47,7 +64,7 @@ export const PlaylistThumbnail = ({
       {/* Video count */}
       <div className="absolute bottom-2 right-2 flex items-center gap-x-1 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">
         <ListVideoIcon className="size-4" />
-        {videoCount} videos
+        {compactViews} videos
       </div>
     </div>
   );
