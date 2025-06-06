@@ -12,7 +12,7 @@ export const PlaylistInfoSkeleton = () => {
       <div className="flex-1 min-w-0 space-y-2">
         <Skeleton className="w-[90%] h-5" />
         <Skeleton className="w-[70%] h-5" />
-        <Skeleton className="w-[500%] h-5" />
+        <Skeleton className="w-[50%] h-5" />
       </div>
     </div>
   );
