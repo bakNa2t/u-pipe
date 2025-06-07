@@ -1,7 +1,8 @@
 import { Loader2Icon, SquareCheckIcon, SquareIcon } from "lucide-react";
 
-import { ResponsiveModal } from "@/components/responsive-modal";
 import { Button } from "@/components/ui/button";
+import { ResponsiveModal } from "@/components/responsive-modal";
+import { InfiniteScroll } from "@/components/infinite-scroll";
 
 import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
@@ -17,17 +18,22 @@ export const PlaylistAddModal = ({
   videoId,
   onOpenChange,
 }: PlaylistAddModalProps) => {
-  const { data: playlists, isLoading } =
-    trpc.playlists.getManyForVideo.useInfiniteQuery(
-      {
-        videoId,
-        limit: DEFAULT_LIMIT,
-      },
-      {
-        getNextPageParam: (lastPage) => lastPage.nextCursor,
-        enabled: !!videoId && open,
-      }
-    );
+  const {
+    data: playlists,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = trpc.playlists.getManyForVideo.useInfiniteQuery(
+    {
+      videoId,
+      limit: DEFAULT_LIMIT,
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+      enabled: !!videoId && open,
+    }
+  );
 
   return (
     <ResponsiveModal
@@ -59,6 +65,15 @@ export const PlaylistAddModal = ({
                 {playlist.name}
               </Button>
             ))}
+
+        {!isLoading && (
+          <InfiniteScroll
+            isManual
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+            fetchNextPage={fetchNextPage}
+          />
+        )}
       </div>
     </ResponsiveModal>
   );
