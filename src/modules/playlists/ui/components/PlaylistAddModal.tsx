@@ -48,6 +48,17 @@ export const PlaylistAddModal = ({
     },
   });
 
+  const removeVideo = trpc.playlists.removeVideo.useMutation({
+    onSuccess: () => {
+      toast.success("Video removed from playlist");
+      utils.playlists.getMany.invalidate();
+      utils.playlists.getManyForVideo.invalidate({ videoId });
+    },
+    onError: () => {
+      toast.error("Failed to remove video to playlist");
+    },
+  });
+
   return (
     <ResponsiveModal
       title="Add to a playlist"
@@ -70,10 +81,13 @@ export const PlaylistAddModal = ({
                 className="justify-start w-full px-2 [&_svg]:size-5"
                 size="lg"
                 onClick={() => {
-                  if (!playlist.containsVideo) {
+                  if (playlist.containsVideo) {
+                    removeVideo.mutate({ playlistId: playlist.id, videoId });
+                  } else {
                     addVideo.mutate({ playlistId: playlist.id, videoId });
                   }
                 }}
+                disabled={addVideo.isPending || removeVideo.isPending}
               >
                 {playlist.containsVideo ? (
                   <SquareCheckIcon className="mr-2" />
