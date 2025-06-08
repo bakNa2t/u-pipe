@@ -6,6 +6,7 @@ import { InfiniteScroll } from "@/components/infinite-scroll";
 
 import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
+import { toast } from "sonner";
 
 interface PlaylistAddModalProps {
   open: boolean;
@@ -18,6 +19,7 @@ export const PlaylistAddModal = ({
   videoId,
   onOpenChange,
 }: PlaylistAddModalProps) => {
+  const utils = trpc.useUtils();
   const {
     data: playlists,
     isLoading,
@@ -34,6 +36,17 @@ export const PlaylistAddModal = ({
       enabled: !!videoId && open,
     }
   );
+
+  const addVideo = trpc.playlists.addVideo.useMutation({
+    onSuccess: () => {
+      toast.success("Video added to playlist");
+      utils.playlists.getMany.invalidate();
+      utils.playlists.getManyForVideo.invalidate({ videoId });
+    },
+    onError: () => {
+      toast.error("Failed to add video to playlist");
+    },
+  });
 
   return (
     <ResponsiveModal
@@ -56,6 +69,11 @@ export const PlaylistAddModal = ({
                 variant="ghost"
                 className="justify-start w-full px-2 [&_svg]:size-5"
                 size="lg"
+                onClick={() => {
+                  if (!playlist.containsVideo) {
+                    addVideo.mutate({ playlistId: playlist.id, videoId });
+                  }
+                }}
               >
                 {playlist.containsVideo ? (
                   <SquareCheckIcon className="mr-2" />
