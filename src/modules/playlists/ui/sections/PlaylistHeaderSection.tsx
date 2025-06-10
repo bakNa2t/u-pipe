@@ -1,3 +1,5 @@
+"use client";
+
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -7,6 +9,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { trpc } from "@/trpc/client";
 
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface PlaylistHeaderSectionProps {
   playlistId: string;
@@ -16,11 +19,20 @@ export const PlaylistHeaderSection = ({
   playlistId,
 }: PlaylistHeaderSectionProps) => {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<PlaylistHeaderSectionSkeleton />}>
       <ErrorBoundary fallback={<p>Error</p>}>
         <PlaylistHeaderSectionSuspense playlistId={playlistId} />
       </ErrorBoundary>
     </Suspense>
+  );
+};
+
+const PlaylistHeaderSectionSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-y-2">
+      <Skeleton className="w-24 h-6" />
+      <Skeleton className="w-32 h-4" />
+    </div>
   );
 };
 
