@@ -1,6 +1,6 @@
 import { HydrateClient, trpc } from "@/trpc/server";
 
-import { UserView } from "@/modules/users/ui/components/UserView";
+import { UserView } from "@/modules/users/ui/views/UserView";
 
 interface PageProps {
   params: Promise<{
