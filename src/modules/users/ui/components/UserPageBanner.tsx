@@ -2,6 +2,7 @@ import { useAuth } from "@clerk/nextjs";
 import { Edit2Icon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { cn } from "@/lib/utils";
 import { UserGetOneOutput } from "../../types";
@@ -9,6 +10,10 @@ import { UserGetOneOutput } from "../../types";
 interface UserPageBannerProps {
   user: UserGetOneOutput;
 }
+
+export const UserPageBannerSkeleton = () => {
+  return <Skeleton className="w-full max-h-[200px] h-[15vh] md:h-[25vh]" />;
+};
 
 export const UserPageBanner = ({ user }: UserPageBannerProps) => {
   const { userId } = useAuth();
