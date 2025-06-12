@@ -6,7 +6,7 @@ import { trpc } from "@/trpc/client";
 interface UseSubscriptionProps {
   userId: string;
   isSubscribed: boolean;
-  fromVideoId: string;
+  fromVideoId?: string;
 }
 
 export const useSubscription = ({
@@ -22,6 +22,7 @@ export const useSubscription = ({
       toast.success("Subscribed successfully");
 
       utils.videos.getManySubscribed.invalidate();
+      utils.users.getOne.invalidate({ id: userId });
 
       if (fromVideoId) {
         utils.videos.getOne.invalidate({ id: fromVideoId });
@@ -41,6 +42,7 @@ export const useSubscription = ({
       toast.success("Unsubscribed successfully");
 
       utils.videos.getManySubscribed.invalidate();
+      utils.users.getOne.invalidate({ id: userId });
 
       if (fromVideoId) {
         utils.videos.getOne.invalidate({ id: fromVideoId });
