@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { useClerk, useAuth } from "@clerk/nextjs";
 
-import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { UserAvatar } from "@/components/user-avatar";
 
 import { SubscriptionButton } from "@/modules/subscriptions/ui/components/SubscriptionButton";
 
@@ -13,6 +14,37 @@ import { cn } from "@/lib/utils";
 interface UserPageInfoProps {
   user: UserGetOneOutput;
 }
+
+export const UserPageInfoSkeleton = () => {
+  return (
+    <div className="py-6">
+      {/* for mobile screen */}
+      <div className="flex flex-col md:hidden">
+        <div className="flex items-center gap-3">
+          <Skeleton className="w-[60px] h-[60px] rounded-full" />
+
+          <div className="flex-1 min-w-0">
+            <Skeleton className="w-32 h-6" />
+            <Skeleton className="w-48 h-4 mt-1" />
+          </div>
+        </div>
+
+        <Skeleton className="w-full h-10 mt-3 rounded-full" />
+      </div>
+
+      {/* for desktop screen */}
+      <div className="hidden md:flex items-start gap-4">
+        <Skeleton className="w-[160px] h-[160px] rounded-full" />
+
+        <div className="flex-1 min-w-0">
+          <Skeleton className="w-64 h-8" />
+          <Skeleton className="w-48 h-5 mt-4" />
+          <Skeleton className="w-32 h-10 mt-3 rounded-full" />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const UserPageInfo = ({ user }: UserPageInfoProps) => {
   const clerk = useClerk();
