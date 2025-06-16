@@ -19,7 +19,7 @@ export const appRouter = createTRPCRouter({
   categories: categoriesRouter,
   videoViews: videoViewsRouter,
   videoReactions: videoReactionsRouter,
-  subsriptions: subscriptionsRouter,
+  subscriptions: subscriptionsRouter,
   comments: commentsRouter,
   commentReaction: commentReactionsRouter,
   suggestions: suggestionsRouter,
