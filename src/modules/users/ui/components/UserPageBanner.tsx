@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { Edit2Icon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { UserBannerUploadModal } from "./UserBannerUploadModal";
 
 import { cn } from "@/lib/utils";
 import { UserGetOneOutput } from "../../types";
@@ -17,9 +19,17 @@ export const UserPageBannerSkeleton = () => {
 
 export const UserPageBanner = ({ user }: UserPageBannerProps) => {
   const { userId } = useAuth();
+  const [isUserBannerUploadModalOpen, setIsUserBannerUploadModalOpen] =
+    useState(false);
 
   return (
     <div className="relative group">
+      <UserBannerUploadModal
+        userId={user.id}
+        open={isUserBannerUploadModalOpen}
+        onOpenChange={setIsUserBannerUploadModalOpen}
+      />
+
       <div
         className={cn(
           "w-full max-h-[200px] h-[15vh] md:h-[25vh] bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl",
@@ -36,6 +46,7 @@ export const UserPageBanner = ({ user }: UserPageBannerProps) => {
             type="button"
             size="icon"
             className="absolute top-4 right-4 rounded-full bg-black/50 hover:bg-black/50 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            onClick={() => setIsUserBannerUploadModalOpen(true)}
           >
             <Edit2Icon className="size-4 text-white" />
           </Button>
