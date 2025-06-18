@@ -5,10 +5,11 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { toast } from "sonner";
 
-import { VideoGridCardSkeleton } from "@/modules/videos/ui/components/VideoGridCard";
-import { VideoRowCardSkeleton } from "@/modules/videos/ui/components/VideoRowCard";
 import { InfiniteScroll } from "@/components/infinite-scroll";
-import { SubscriptionItem } from "../components/SubscriptionItem";
+import {
+  SubscriptionItem,
+  SubscriptionItemSkeleton,
+} from "../components/SubscriptionItem";
 
 import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
@@ -25,17 +26,10 @@ export const SubscriptionsSection = () => {
 
 const SubscriptionsSectionSkeleton = () => {
   return (
-    <div>
-      <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-        {Array.from({ length: 18 }).map((_, index) => (
-          <VideoGridCardSkeleton key={index} />
-        ))}
-      </div>
-      <div className="hidden flex-col gap-4 md:flex">
-        {Array.from({ length: 18 }).map((_, index) => (
-          <VideoRowCardSkeleton key={index} size="compact" />
-        ))}
-      </div>
+    <div className="flex flex-col gap-4">
+      {Array.from({ length: 8 }).map((_, index) => (
+        <SubscriptionItemSkeleton key={index} />
+      ))}
     </div>
   );
 };
