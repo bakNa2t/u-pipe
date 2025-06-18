@@ -1,5 +1,6 @@
 import { UserAvatar } from "@/components/user-avatar";
 import { SubscriptionButton } from "./SubscriptionButton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface SubscriptionItemProps {
   name: string;
@@ -8,6 +9,26 @@ interface SubscriptionItemProps {
   onUnsubscribe: () => void;
   disabled: boolean;
 }
+
+export const SubscriptionItemSkeleton = () => {
+  return (
+    <div className="flex items-start gap-4">
+      <Skeleton className="size-10 rounded-full" />
+
+      <div className="flex-1">
+        <div className="flex items-center justify-between">
+          <div>
+            <Skeleton className="w-24 h-4" />
+            <Skeleton className="w-20 h-3 mt-1" />
+          </div>
+
+          <Skeleton className="w-20 h-8" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const SubscriptionItem = ({
   name,
   imageUrl,
