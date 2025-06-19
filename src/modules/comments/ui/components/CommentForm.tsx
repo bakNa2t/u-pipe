@@ -16,14 +16,14 @@ import {
 } from "@/components/ui/form";
 
 import { trpc } from "@/trpc/client";
-import { commentInsertSchema } from "@/db/schema";
+import { commentFormtSchema } from "@/db/schema";
 
 interface CommentFormProps {
   videoId: string;
   parentId?: string;
   onSuccess?: () => void;
   onCancel?: () => void;
-  variant: "comment" | "reply";
+  variant?: "comment" | "reply";
 }
 
 export const CommentForm = ({
@@ -55,16 +55,16 @@ export const CommentForm = ({
     },
   });
 
-  const form = useForm<z.infer<typeof commentInsertSchema>>({
-    resolver: zodResolver(commentInsertSchema.omit({ userId: true })),
+  const form = useForm<z.infer<typeof commentFormtSchema>>({
+    resolver: zodResolver(commentFormtSchema),
     defaultValues: {
-      videoId: videoId,
       parentId: parentId,
+      videoId: videoId,
       value: "",
     },
   });
 
-  const handleSubmit = (values: z.infer<typeof commentInsertSchema>) => {
+  const handleSubmit = (values: z.infer<typeof commentFormtSchema>) => {
     create.mutate(values);
   };
 
