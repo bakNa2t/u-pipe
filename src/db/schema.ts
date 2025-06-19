@@ -203,6 +203,7 @@ export const commentRelations = relations(comments, ({ one, many }) => ({
 export const commentInsertSchema = createInsertSchema(comments);
 export const commentUpdateSchema = createUpdateSchema(comments);
 export const commentSelectSchema = createSelectSchema(comments);
+export const commentFormtSchema = commentInsertSchema.omit({ userId: true });
 
 // Comment reactions schema
 export const commentReactions = pgTable(
