@@ -5,10 +5,11 @@ import { AuthButton } from "@/modules/auth/ui/components/AuthButton";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 import { SearchInput } from "./SearchInput";
+import { AdvancedMenu } from "./AdvancedMenu";
 
 export const HomeNavbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 h-16 bg-white flex items-center px-2 pr-5 z-50">
+    <nav className="fixed top-0 left-0 right-0 h-16 bg-white flex items-center px-2 md:pr-5 z-50">
       <div className="flex items-center gap-4 w-full">
         {/* Logo */}
         <div className="flex items-center flex-shrink-0">
@@ -27,8 +28,10 @@ export const HomeNavbar = () => {
           <SearchInput />
         </div>
 
-        <div className="flex flex-shrink-0 items-center gap-4">
+        <div className="flex flex-shrink-0 items-center gap-2 md:gap-4">
           <AuthButton />
+
+          <AdvancedMenu />
         </div>
       </div>
     </nav>
