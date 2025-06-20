@@ -372,7 +372,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                       <Textarea
                         {...field}
                         value={field.value ?? ""}
-                        rows={10}
+                        rows={8}
                         className="pr-10 resize-none"
                         placeholder="Add a description for your video"
                       />
@@ -474,6 +474,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
               />
             </div>
 
+            {/*Aside video player */}
             <div className="flex flex-col gap-y-8 lg:col-span-2">
               <div className="flex flex-col gap-4 bg-[#f9f9f9] rounded-xl overflow-hidden h-fit">
                 <div className="relative aspect-video overflow-hidden">
@@ -484,6 +485,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 </div>
 
                 <div className="flex flex-col gap-y-6 p-4">
+                  {/* Video link */}
                   <div className="flex justify-between items-center gap-x-2">
                     <div className="flex flex-col gap-y-1">
                       <p className="text-xs text-muted-foreground">
@@ -511,6 +513,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     </div>
                   </div>
 
+                  {/* Video status */}
                   <div className="flex justify-between items-center">
                     <div className="flex flex-col gap-y-1">
                       <p className="text-xs text-muted-foreground">
@@ -522,6 +525,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     </div>
                   </div>
 
+                  {/* Subtitles status */}
                   <div className="flex justify-between items-center">
                     <div className="flex flex-col gap-y-1">
                       <p className="text-xs text-muted-foreground">
@@ -537,6 +541,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 </div>
               </div>
 
+              {/* Visibility status */}
               <FormField
                 control={form.control}
                 name="visibility"
