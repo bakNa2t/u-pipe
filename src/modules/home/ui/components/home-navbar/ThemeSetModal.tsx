@@ -1,3 +1,4 @@
+import { MonitorCogIcon, MoonIcon, SunIcon } from "lucide-react";
 import { ResponsiveModal } from "@/components/responsive-modal";
 import {
   Select,
@@ -28,9 +29,18 @@ export const ThemeModeSetModal = ({
         </SelectTrigger>
 
         <SelectContent>
-          <SelectItem value="light">Light</SelectItem>
-          <SelectItem value="dark">Dark</SelectItem>
-          <SelectItem value="system">System</SelectItem>
+          <SelectItem value="light">
+            <SunIcon className="size-4 mr-2" />
+            Light
+          </SelectItem>
+          <SelectItem value="dark">
+            <MoonIcon className="size-4 mr-2" />
+            Dark
+          </SelectItem>
+          <SelectItem value="system">
+            <MonitorCogIcon className="size-4 mr-2" />
+            System
+          </SelectItem>
         </SelectContent>
       </Select>
     </ResponsiveModal>
