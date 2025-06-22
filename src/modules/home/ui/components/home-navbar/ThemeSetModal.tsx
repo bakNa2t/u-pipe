@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface UserBannerUploadModal {
+interface ThemeModeSetModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
@@ -16,7 +16,7 @@ interface UserBannerUploadModal {
 export const ThemeModeSetModal = ({
   open,
   onOpenChange,
-}: UserBannerUploadModal) => {
+}: ThemeModeSetModalProps) => {
   return (
     <ResponsiveModal
       title="Set app theme"
