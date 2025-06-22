@@ -11,14 +11,21 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { ThemeModeSetModal } from "./ThemeSetModal";
+import { LanguageSetModal } from "./LanguageSetModal";
 
 export const AdvancedMenu = () => {
   const [isOpenThemeModal, setIsOpenThemeModal] = useState(false);
+  const [isOpenLangModal, setIsOpenLangModal] = useState(false);
   return (
     <>
       <ThemeModeSetModal
         open={isOpenThemeModal}
         onOpenChange={setIsOpenThemeModal}
+      />
+
+      <LanguageSetModal
+        open={isOpenLangModal}
+        onOpenChange={setIsOpenLangModal}
       />
 
       <DropdownMenu>
@@ -34,7 +41,7 @@ export const AdvancedMenu = () => {
             Theme
           </DropdownMenuItem>
 
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setIsOpenLangModal(true)}>
             <GlobeIcon className="size-4 mr-2" />
             Language
           </DropdownMenuItem>
