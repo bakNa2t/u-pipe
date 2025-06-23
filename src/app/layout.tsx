@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
 import { TRPCProvider } from "@/trpc/client";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 import "./globals.css";
 
@@ -29,11 +30,19 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider afterSignOutUrl="/">
-      <html lang="en">
-        <body className={inter.className}>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${inter.className} dark:bg-[#191919]`}>
           <TRPCProvider>
-            <Toaster />
-            {children}
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="u-pipe-theme"
+            >
+              <Toaster />
+              {children}
+            </ThemeProvider>
           </TRPCProvider>
         </body>
       </html>
