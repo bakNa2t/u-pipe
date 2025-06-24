@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { GlobeIcon, MoreVerticalIcon, SunMoonIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { GlobeIcon, MoonIcon, MoreVerticalIcon, SunIcon } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -16,6 +17,8 @@ import { LanguageSetModal } from "./LanguageSetModal";
 export const AdvancedMenu = () => {
   const [isOpenThemeModal, setIsOpenThemeModal] = useState(false);
   const [isOpenLangModal, setIsOpenLangModal] = useState(false);
+  const { theme } = useTheme();
+
   return (
     <>
       <ThemeModeSetModal
@@ -37,7 +40,11 @@ export const AdvancedMenu = () => {
 
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => setIsOpenThemeModal(true)}>
-            <SunMoonIcon className="size-4 mr-2" />
+            {theme === "light" ? (
+              <SunIcon className="size-4 mr-2" />
+            ) : (
+              <MoonIcon className="size-4 mr-2" />
+            )}
             Theme
           </DropdownMenuItem>
 
