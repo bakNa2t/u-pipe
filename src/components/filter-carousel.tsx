@@ -51,7 +51,7 @@ export const FilterCarousel = ({
     <div className="relative w-full">
       <div
         className={cn(
-          "absolute left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none",
+          "absolute left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white dark:from-[#191919] to-transparent pointer-events-none",
           current === 1 && "hidden"
         )}
       />
@@ -111,7 +111,7 @@ export const FilterCarousel = ({
 
       <div
         className={cn(
-          "absolute right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none",
+          "absolute right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white dark:from-[#191919] to-transparent pointer-events-none",
           current === count && "hidden"
         )}
       />

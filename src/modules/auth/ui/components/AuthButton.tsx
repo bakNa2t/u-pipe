@@ -29,7 +29,7 @@ export const AuthButton = () => {
         <SignInButton mode="modal">
           <Button
             variant="outline"
-            className="px-4 py-2 text-sm font-medium text-violet-500 hover:text-violet-700/80 border-violet-900/60 rounded-full shadow-none [&_svg]:size-6"
+            className="px-4 py-2 text-sm font-medium text-violet-500 hover:text-violet-700/80 dark:hover:text-violet-400 border-violet-800/60 dark:border-violet-900 rounded-full shadow-none [&_svg]:size-6"
           >
             <UserCircleIcon />
             Sign In
