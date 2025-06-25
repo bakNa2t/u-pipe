@@ -1,4 +1,4 @@
-import { LanguagesIcon } from "lucide-react";
+import { Check, LanguagesIcon } from "lucide-react";
 
 import { ResponsiveModal } from "@/components/responsive-modal";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 
 interface LanguageSetModalProps {
   open: boolean;
@@ -18,6 +19,8 @@ export const LanguageSetModal = ({
   open,
   onOpenChange,
 }: LanguageSetModalProps) => {
+  const [locale, setLocale] = useState("");
+
   return (
     <ResponsiveModal
       title="Set language"
@@ -32,8 +35,14 @@ export const LanguageSetModal = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
-          <DropdownMenuItem>English</DropdownMenuItem>
-          <DropdownMenuItem>Russian</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setLocale("en")}>
+            English
+            {locale === "en" && <Check className="h-4 w-4" />}
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setLocale("ru")}>
+            Russian
+            {locale === "ru" && <Check className="h-4 w-4" />}
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </ResponsiveModal>
