@@ -1,0 +1,11 @@
+{
+  "HomeSidebar": {
+    "home": "Home",
+    "subscriptions": "Subscriptions",
+    "trending": "Trending",
+    "you": "You",
+    "history": "History",
+    "likedVideos": "Liked videos",
+    "allPlaylists": "All playlists"
+  }
+}
