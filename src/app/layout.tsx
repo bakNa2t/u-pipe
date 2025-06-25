@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 import { TRPCProvider } from "@/trpc/client";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -23,27 +25,32 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const messages = await getMessages();
+  const locale = await getLocale();
+
   return (
     <ClerkProvider afterSignOutUrl="/">
-      <html lang="en" suppressHydrationWarning>
+      <html lang={locale} suppressHydrationWarning>
         <body className={`${inter.className} dark:bg-[#191919]`}>
-          <TRPCProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-              storageKey="u-pipe-theme"
-            >
-              <Toaster />
-              {children}
-            </ThemeProvider>
-          </TRPCProvider>
+          <NextIntlClientProvider messages={messages}>
+            <TRPCProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+                storageKey="u-pipe-theme"
+              >
+                <Toaster />
+                {children}
+              </ThemeProvider>
+            </TRPCProvider>
+          </NextIntlClientProvider>
         </body>
       </html>
     </ClerkProvider>
