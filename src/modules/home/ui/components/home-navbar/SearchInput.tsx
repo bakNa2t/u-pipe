@@ -2,6 +2,7 @@
 
 import React, { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { SearchIcon, XIcon } from "lucide-react";
 
 import { APP_URL } from "@/constants";
@@ -22,6 +23,7 @@ const SearchInputSuspense = () => {
   const query = searchParams.get("query") || "";
   const categoryId = searchParams.get("categoryId") || "";
   const [value, setValue] = useState(query);
+  const t = useTranslations("Navbar");
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,7 +52,7 @@ const SearchInputSuspense = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           type="text"
-          placeholder="Search..."
+          placeholder={t("search")}
           className="w-full pl-4 pr-12 py-2 rounded-l-full border focus:outline-none focus:border-violet-900 dark:focus:border-violet-400"
         />
 
