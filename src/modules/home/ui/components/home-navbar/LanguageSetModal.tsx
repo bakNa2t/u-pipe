@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Check, LanguagesIcon } from "lucide-react";
 
 import { ResponsiveModal } from "@/components/responsive-modal";
@@ -8,7 +10,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState } from "react";
 
 interface LanguageSetModalProps {
   open: boolean;
@@ -20,6 +21,30 @@ export const LanguageSetModal = ({
   onOpenChange,
 }: LanguageSetModalProps) => {
   const [locale, setLocale] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const cookieLocale = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("UPIPE_TRANSLATION_LOCALE="))
+      ?.split("=")[1];
+
+    if (cookieLocale) {
+      setLocale(cookieLocale);
+    } else {
+      const browserLocale = navigator.language.slice(0, 2);
+      setLocale(browserLocale);
+
+      document.cookie = `UPIPE_TRANSLATION_LOCALE=${browserLocale};`;
+      router.refresh();
+    }
+  }, [router]);
+
+  const changeLocale = (newLocale: string) => {
+    setLocale(newLocale);
+    document.cookie = `UPIPE_TRANSLATION_LOCALE=${newLocale};`;
+    router.refresh();
+  };
 
   return (
     <ResponsiveModal
@@ -35,11 +60,11 @@ export const LanguageSetModal = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
-          <DropdownMenuItem onClick={() => setLocale("en")}>
+          <DropdownMenuItem onClick={() => changeLocale("en")}>
             English
             {locale === "en" && <Check className="h-4 w-4" />}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setLocale("ru")}>
+          <DropdownMenuItem onClick={() => changeLocale("ru")}>
             Russian
             {locale === "ru" && <Check className="h-4 w-4" />}
           </DropdownMenuItem>
