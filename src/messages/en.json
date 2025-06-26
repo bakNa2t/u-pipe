@@ -1,5 +1,8 @@
 {
-  "HomeSidebar": {
+  "Home": {
+    "welcome": "Welcome to Upipe"
+  },
+  "Sidebar": {
     "home": "Home",
     "subscriptions": "Subscriptions",
     "trending": "Trending",
@@ -7,5 +10,19 @@
     "history": "History",
     "likedVideos": "Liked videos",
     "allPlaylists": "All playlists"
+  },
+  "Navbar": {
+    "signIn": "Sign In",
+    "search": "Search...",
+    "theme": "Theme",
+    "themeModalTitle": "Set app theme",
+    "themeDark": "Dark",
+    "themeLight": "Light",
+    "themeSystem": "System",
+    "language": "Language",
+    "languageModalTitle": "Set language",
+    "languageChoose": "Choose language",
+    "languageEn": "English",
+    "languageRu": "Russian"
   }
 }

@@ -1,5 +1,8 @@
 {
-  "HomeSidebar": {
+  "Home": {
+    "welcome": "Добро пожаловать в Upipe"
+  },
+  "Sidebar": {
     "home": "Главная",
     "subscriptions": "Подписки",
     "trending": "Тренды",
@@ -7,5 +10,19 @@
     "history": "История",
     "likedVideos": "Понравившиеся видео",
     "allPlaylists": "Все плейлисты"
+  },
+  "Navbar": {
+    "signIn": "Войти",
+    "search": "Поиск...",
+    "theme": "Тема",
+    "themeModalTitle": "Установить тему приложения",
+    "themeDark": "Темная",
+    "themeLight": "Светлая",
+    "themeSystem": "Системная",
+    "language": "Язык",
+    "languageModalTitle": "Установить язык",
+    "languageChoose": "Выберите язык",
+    "languageEn": "Английский",
+    "languageRu": "Русский"
   }
 }

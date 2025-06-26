@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 import { GlobeIcon, MoonIcon, MoreVerticalIcon, SunIcon } from "lucide-react";
 
 import {
@@ -18,6 +19,7 @@ export const AdvancedMenu = () => {
   const [isOpenThemeModal, setIsOpenThemeModal] = useState(false);
   const [isOpenLangModal, setIsOpenLangModal] = useState(false);
   const { theme } = useTheme();
+  const t = useTranslations("Navbar");
 
   return (
     <>
@@ -45,12 +47,12 @@ export const AdvancedMenu = () => {
             ) : (
               <MoonIcon className="size-4 mr-2" />
             )}
-            Theme
+            {t("theme")}
           </DropdownMenuItem>
 
           <DropdownMenuItem onClick={() => setIsOpenLangModal(true)}>
             <GlobeIcon className="size-4 mr-2" />
-            Language
+            {t("language")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
