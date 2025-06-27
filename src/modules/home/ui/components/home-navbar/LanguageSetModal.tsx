@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Check, LanguagesIcon } from "lucide-react";
 
 import { ResponsiveModal } from "@/components/responsive-modal";
@@ -22,6 +23,7 @@ export const LanguageSetModal = ({
 }: LanguageSetModalProps) => {
   const [locale, setLocale] = useState("");
   const router = useRouter();
+  const t = useTranslations("Navbar");
 
   useEffect(() => {
     const cookieLocale = document.cookie
@@ -48,7 +50,7 @@ export const LanguageSetModal = ({
 
   return (
     <ResponsiveModal
-      title="Set language"
+      title={t("languageModalTitle")}
       open={open}
       onOpenChange={onOpenChange}
     >
@@ -56,16 +58,16 @@ export const LanguageSetModal = ({
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="row_fit" className="px-2 md:px-4">
             <LanguagesIcon />
-            <span>Choose language</span>
+            <span>{t("languageChoose")}</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={() => changeLocale("en")}>
-            English
+            {t("languageEn")}
             {locale === "en" && <Check className="h-4 w-4" />}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => changeLocale("ru")}>
-            Russian
+            {t("languageRu")}
             {locale === "ru" && <Check className="h-4 w-4" />}
           </DropdownMenuItem>
         </DropdownMenuContent>
