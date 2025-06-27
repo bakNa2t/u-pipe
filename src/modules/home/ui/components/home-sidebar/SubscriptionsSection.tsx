@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ListIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import {
   SidebarGroup,
@@ -43,10 +44,11 @@ export const SubscriptionsSection = () => {
       getNextPageParam: (lastPage) => lastPage.nextCursor,
     }
   );
+  const t = useTranslations("Sidebar");
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Subscriptions</SidebarGroupLabel>
+      <SidebarGroupLabel>{t("subscriptions")}</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
           {isLoading && <SubscriptionsSectionLoadingSkeleton />}
@@ -86,7 +88,7 @@ export const SubscriptionsSection = () => {
               >
                 <Link href="/subscriptions" className="flex items-center gap-4">
                   <ListIcon className="size-4" />
-                  <span className="text-sm">All subscriptions</span>
+                  <span className="text-sm">{t("allSubscriptions")}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
