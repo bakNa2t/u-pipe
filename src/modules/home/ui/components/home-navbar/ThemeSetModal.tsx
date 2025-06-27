@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslations } from "next-intl";
 
 interface ThemeModeSetModalProps {
   open: boolean;
@@ -20,10 +21,11 @@ export const ThemeModeSetModal = ({
   onOpenChange,
 }: ThemeModeSetModalProps) => {
   const { theme, setTheme } = useTheme();
+  const t = useTranslations("Navbar");
 
   return (
     <ResponsiveModal
-      title="Set app theme"
+      title={t("themeModalTitle")}
       open={open}
       onOpenChange={onOpenChange}
     >
@@ -35,20 +37,22 @@ export const ThemeModeSetModal = ({
             ) : (
               <Moon className="size-4" />
             )}
-            <span>{theme === "light" ? "Light" : "Dark"}</span>
+            <span>
+              {theme === "light" ? `${t("themeLight")}` : `${t("themeDark")}`}
+            </span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={() => setTheme("light")}>
-            Light
+            {t("themeLight")}
             {theme === "light" && <Check className="h-4 w-4" />}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme("dark")}>
-            Dark
+            {t("themeDark")}
             {theme === "dark" && <Check className="h-4 w-4" />}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme("system")}>
-            System
+            {t("themeSystem")}
             {theme === "system" && <Check className="h-4 w-4" />}
           </DropdownMenuItem>
         </DropdownMenuContent>
