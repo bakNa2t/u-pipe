@@ -9,7 +9,8 @@
     "you": "You",
     "history": "History",
     "likedVideos": "Liked videos",
-    "allPlaylists": "All playlists"
+    "allPlaylists": "All playlists",
+    "allSubscriptions": "All subscriptions"
   },
   "Navbar": {
     "signIn": "Sign In",

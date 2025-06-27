@@ -9,7 +9,8 @@
     "you": "Вы",
     "history": "История",
     "likedVideos": "Понравившиеся видео",
-    "allPlaylists": "Все плейлисты"
+    "allPlaylists": "Все плейлисты",
+    "allSubscriptions": "Все подписки"
   },
   "Navbar": {
     "signIn": "Войти",
