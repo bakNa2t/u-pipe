@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth, useClerk } from "@clerk/nextjs";
@@ -13,7 +14,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-const menuItems = [
+const menuItemsEng = [
   {
     title: "Home",
     url: "/",
@@ -32,10 +33,47 @@ const menuItems = [
   },
 ];
 
+const menuItemsRus = [
+  {
+    title: "Главная",
+    url: "/",
+    icon: HomeIcon,
+  },
+  {
+    title: "Подписки",
+    url: "/feed/subscribed",
+    icon: PlaySquareIcon,
+    auth: true,
+  },
+  {
+    title: "Тренды",
+    url: "/feed/trending",
+    icon: FlameIcon,
+  },
+];
+
 export const MainSection = () => {
   const clerkUser = useClerk();
   const pathname = usePathname();
   const { isSignedIn } = useAuth();
+
+  const [locale, setLocale] = useState("");
+
+  useEffect(() => {
+    const documentCookie =
+      document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("UPIPE_TRANSLATION_LOCALE="))
+        ?.split("=")[1] || navigator.language.slice(0, 2);
+
+    if (!documentCookie) {
+      setLocale(navigator.language.slice(0, 2));
+    } else {
+      setLocale(documentCookie);
+    }
+  }, [locale]);
+
+  const menuItems = locale === "en" ? menuItemsEng : menuItemsRus;
 
   return (
     <SidebarGroup>
