@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import { FlameIcon, HomeIcon, PlaySquareIcon } from "lucide-react";
 
@@ -55,23 +55,8 @@ const menuItemsRus = [
 export const MainSection = () => {
   const clerkUser = useClerk();
   const pathname = usePathname();
+  const locale = useLocale();
   const { isSignedIn } = useAuth();
-
-  const [locale, setLocale] = useState("");
-
-  useEffect(() => {
-    const documentCookie =
-      document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("UPIPE_TRANSLATION_LOCALE="))
-        ?.split("=")[1] || navigator.language.slice(0, 2);
-
-    if (!documentCookie) {
-      setLocale(navigator.language.slice(0, 2));
-    } else {
-      setLocale(documentCookie);
-    }
-  }, [locale]);
 
   const menuItems = locale === "en" ? menuItemsEng : menuItemsRus;
 
