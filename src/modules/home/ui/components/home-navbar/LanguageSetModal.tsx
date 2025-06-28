@@ -56,10 +56,16 @@ export const LanguageSetModal = ({
     >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="row_fit" className="px-2 md:px-4">
-            <LanguagesIcon />
-            <span>{t("languageChoose")}</span>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="row_fit" className="px-2 md:px-4">
+              <LanguagesIcon />
+              <span>{t("languageChoose")}</span>
+            </Button>
+
+            <p className="text-sm text-muted-foreground">
+              {t("currentLang")}: {locale && locale === "en" ? "EN" : "RU"}
+            </p>
+          </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={() => changeLocale("en")}>
