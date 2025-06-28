@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { LogOutIcon, VideoIcon } from "lucide-react";
 
 import {
@@ -18,6 +19,7 @@ import { StudioSidebarHeader } from "./StudioSidebarHeader";
 
 export const StudioSidebar = () => {
   const pathname = usePathname();
+  const t = useTranslations("Sidebar");
 
   return (
     <Sidebar className="pt-16 border z-40" collapsible="icon">
@@ -34,7 +36,7 @@ export const StudioSidebar = () => {
               >
                 <Link href="/studio">
                   <VideoIcon className="size-5" />
-                  <span className="text-sm">Content</span>
+                  <span className="text-sm">{t("studioContent")}</span>
                 </Link>
               </SidebarMenuButton>
 
@@ -43,7 +45,7 @@ export const StudioSidebar = () => {
               <SidebarMenuButton tooltip="Exit studio" asChild>
                 <Link href="/">
                   <LogOutIcon className="size-5" />
-                  <span className="text-sm">Exit studio</span>
+                  <span className="text-sm">{t("studioExit")}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

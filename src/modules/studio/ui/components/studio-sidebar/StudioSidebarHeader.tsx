@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useUser } from "@clerk/nextjs";
 
 import {
@@ -13,6 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export const StudioSidebarHeader = () => {
   const { user } = useUser();
   const { state } = useSidebar();
+  const t = useTranslations("Sidebar");
 
   if (!user) {
     return (
@@ -29,14 +31,14 @@ export const StudioSidebarHeader = () => {
   if (state === "collapsed") {
     return (
       <SidebarMenuItem>
-        <SidebarMenuButton tooltip="Your profile" asChild>
+        <SidebarMenuButton tooltip={`${t("studioProfile")}`} asChild>
           <Link href="/users/current">
             <UserAvatar
               imageUrl={user.imageUrl}
               name={user.fullName ?? "User"}
               size="xs"
             />
-            <span className="text-sm">Your profile</span>
+            <span className="text-sm">{t("studioProfile")}</span>
           </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -54,7 +56,7 @@ export const StudioSidebarHeader = () => {
       </Link>
 
       <div className="flex flex-col items-center gap-y-1 mt-2">
-        <p className="text-sm font-medium">Your profile</p>
+        <p className="text-sm font-medium">{t("studioProfile")}</p>
         <p className="text-xs text-muted-foreground">{user.fullName}</p>
       </div>
     </SidebarHeader>
