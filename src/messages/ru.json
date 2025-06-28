@@ -10,7 +10,10 @@
     "history": "История",
     "likedVideos": "Понравившиеся видео",
     "allPlaylists": "Все плейлисты",
-    "allSubscriptions": "Все подписки"
+    "allSubscriptions": "Все подписки",
+    "studioContent": "Контент",
+    "studioExit": "Выйти из студии",
+    "studioProfile": "Ваш профиль"
   },
   "Navbar": {
     "signIn": "Войти",
@@ -24,6 +27,7 @@
     "languageModalTitle": "Установить язык",
     "languageChoose": "Выберите язык",
     "languageEn": "Английский",
-    "languageRu": "Русский"
+    "languageRu": "Русский",
+    "currentLang": "Текущий язык"
   }
 }
