@@ -28,6 +28,17 @@
     "languageChoose": "Выберите язык",
     "languageEn": "Английский",
     "languageRu": "Русский",
-    "currentLang": "Текущий язык"
+    "currentLang": "Текущий язык",
+    "studioCreate": "Создать",
+    "studioUpload": "Загрузить"
+  },
+  "InfiniteScroll": {
+    "loadMore": "Загрузить ещё",
+    "loadingMore": "Загружаю ещё...",
+    "reachedEndOfTheList": "Вы достигли конца списка"
+  },
+  "Toast": {
+    "videoUpload": "Видео успешно загружено",
+    "somethingWrong": "Что-то пошло не так"
   }
 }
