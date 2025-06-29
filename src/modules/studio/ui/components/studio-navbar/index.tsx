@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { AuthButton } from "@/modules/auth/ui/components/AuthButton";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { AdvancedMenu } from "@/modules/home/ui/components/home-navbar/AdvancedMenu";
 
 import { StudioUploadModal } from "../StudioUploadModal";
 
@@ -28,6 +29,8 @@ export const StudioNavbar = () => {
           <StudioUploadModal />
 
           <AuthButton />
+
+          <AdvancedMenu />
         </div>
       </div>
     </nav>

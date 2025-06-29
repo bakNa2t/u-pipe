@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Loader2Icon, PlusIcon } from "lucide-react";
 import { toast } from "sonner";
 
@@ -12,14 +13,17 @@ import { trpc } from "@/trpc/client";
 
 export const StudioUploadModal = () => {
   const router = useRouter();
+  const t = useTranslations("Navbar");
+  const tToast = useTranslations("Toast");
   const utils = trpc.useUtils();
+
   const create = trpc.videos.create.useMutation({
     onSuccess: () => {
-      toast.success("Video uploaded successfully");
+      toast.success(tToast("videoUpload"));
       utils.studio.getMany.invalidate();
     },
     onError: () => {
-      toast.error("Something went wrong");
+      toast.error(tToast("somethingWrong"));
     },
   });
 
@@ -33,7 +37,7 @@ export const StudioUploadModal = () => {
   return (
     <>
       <ResponsiveModal
-        title="Upload"
+        title={t("studioUpload")}
         open={!!create.data?.url}
         onOpenChange={() => create.reset()}
       >
@@ -50,7 +54,7 @@ export const StudioUploadModal = () => {
         disabled={create.isPending}
       >
         {create.isPending ? <Loader2Icon /> : <PlusIcon />}
-        Create
+        {t("studioCreate")}
       </Button>
     </>
   );
