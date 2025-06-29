@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 
@@ -21,6 +22,7 @@ export const InfiniteScroll = ({
     threshold: 0.5,
     rootMargin: "100px",
   });
+  const t = useTranslations("InfiniteScroll");
 
   useEffect(() => {
     if (isIntersecting && hasNextPage && !isFetchingNextPage && !isManual) {
@@ -44,11 +46,11 @@ export const InfiniteScroll = ({
           disabled={!hasNextPage || isFetchingNextPage}
           onClick={() => fetchNextPage()}
         >
-          {isFetchingNextPage ? "Loading more..." : "Load more"}
+          {isFetchingNextPage ? t("loadingMore") : t("loadMore")}
         </Button>
       ) : (
         <p className="text-xs text-muted-foreground">
-          You have reached the end of the list
+          {t("reachedEndOfTheList")}
         </p>
       )}
     </div>
