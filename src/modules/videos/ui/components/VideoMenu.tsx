@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth, useClerk } from "@clerk/nextjs";
 import {
   ListPlusIcon,
   MoreVerticalIcon,
@@ -30,6 +31,8 @@ export const VideoMenu = ({
   onRemove,
 }: VideoMenuProps) => {
   const [isOpenPlaylistAddModal, setIsOpenPlaylistAddModal] = useState(false);
+  const { isSignedIn } = useAuth();
+  const clerkUser = useClerk();
 
   const onShare = () => {
     const fullUrl = `${APP_URL}/videos/${videoId}`;
@@ -58,7 +61,16 @@ export const VideoMenu = ({
             Share
           </DropdownMenuItem>
 
-          <DropdownMenuItem onClick={() => setIsOpenPlaylistAddModal(true)}>
+          <DropdownMenuItem
+            onClick={(e) => {
+              if (!isSignedIn) {
+                e.preventDefault();
+                return clerkUser.openSignIn();
+              } else {
+                setIsOpenPlaylistAddModal(true);
+              }
+            }}
+          >
             <ListPlusIcon className="size-4 mr-2" />
             Add to playlist
           </DropdownMenuItem>
