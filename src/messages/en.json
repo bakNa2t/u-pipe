@@ -1,6 +1,8 @@
 {
   "Home": {
-    "welcome": "Welcome to Upipe"
+    "welcome": "Welcome to Upipe",
+    "subscribed": "Subscribed",
+    "subscribedDesc": "Videos from your favorite subscriptions"
   },
   "Sidebar": {
     "home": "Home",

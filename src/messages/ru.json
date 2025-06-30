@@ -1,6 +1,8 @@
 {
   "Home": {
-    "welcome": "Добро пожаловать в Upipe"
+    "welcome": "Добро пожаловать в Upipe",
+    "subscribed": "Подписки",
+    "subscribedDesc": "Видео из ваших любимых подписок"
   },
   "Sidebar": {
     "home": "Главная",
@@ -10,7 +12,7 @@
     "history": "История",
     "likedVideos": "Понравившиеся видео",
     "allPlaylists": "Все плейлисты",
-    "allSubscriptions": "Все подписки",
+    "allSubscriptions": "Все подписчики",
     "studioContent": "Контент",
     "studioExit": "Выйти из студии",
     "studioProfile": "Ваш профиль"
