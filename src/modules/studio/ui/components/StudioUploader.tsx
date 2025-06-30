@@ -1,11 +1,14 @@
-import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+import { UploadIcon } from "lucide-react";
+
 import MuxUploader, {
   MuxUploaderDrop,
   MuxUploaderFileSelect,
   MuxUploaderProgress,
   MuxUploaderStatus,
 } from "@mux/mux-uploader-react";
-import { UploadIcon } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 interface StudioUploaderProps {
   endpoint?: string | null;
@@ -18,6 +21,8 @@ export const StudioUploader = ({
   endpoint,
   onSuccess,
 }: StudioUploaderProps) => {
+  const t = useTranslations("Studio");
+
   return (
     <div>
       <MuxUploader
@@ -34,15 +39,15 @@ export const StudioUploader = ({
           </div>
 
           <div className="flex flex-col gap-2 text-center">
-            <p className="text-sm">Drag and drop video files to upload</p>
+            <p className="text-sm">{t("modalUploadContent")}</p>
             <p className="text-xs text-muted-foreground">
-              Your videos will be private until you publish them
+              {t("modalUploadDesc")}
             </p>
           </div>
 
           <MuxUploaderFileSelect muxUploader={UPLOADER_ID}>
             <Button type="button" className="rounded-full">
-              Select files
+              {t("modalSelectFiles")}
             </Button>
           </MuxUploaderFileSelect>
         </div>

@@ -28,9 +28,7 @@
     "languageChoose": "Выберите язык",
     "languageEn": "Английский",
     "languageRu": "Русский",
-    "currentLang": "Текущий язык",
-    "studioCreate": "Создать",
-    "studioUpload": "Загрузить"
+    "currentLang": "Текущий язык"
   },
   "InfiniteScroll": {
     "loadMore": "Загрузить ещё",
@@ -38,6 +36,11 @@
     "reachedEndOfTheList": "Вы достигли конца списка"
   },
   "Studio": {
+    "btnCreate": "Создать",
+    "modalUploadTitle": "Загрузить",
+    "modalUploadContent": "Перетащите видеофайлы для загрузки",
+    "modalUploadDesc": "Ваши видео будут конфиденциальными, пока вы их не опубликуете",
+    "modalSelectFiles": "Выбрать файлы",
     "channelContent": "Контент",
     "channelContentDesc": "Управляйте контентом и видео вашего канала",
     "headerVideo": "Видео",

@@ -13,7 +13,7 @@ import { trpc } from "@/trpc/client";
 
 export const StudioUploadModal = () => {
   const router = useRouter();
-  const t = useTranslations("Navbar");
+  const t = useTranslations("Studio");
   const tToast = useTranslations("Toast");
   const utils = trpc.useUtils();
 
@@ -37,7 +37,7 @@ export const StudioUploadModal = () => {
   return (
     <>
       <ResponsiveModal
-        title={t("studioUpload")}
+        title={t("modalUploadTitle")}
         open={!!create.data?.url}
         onOpenChange={() => create.reset()}
       >
@@ -54,7 +54,7 @@ export const StudioUploadModal = () => {
         disabled={create.isPending}
       >
         {create.isPending ? <Loader2Icon /> : <PlusIcon />}
-        {t("studioCreate")}
+        {t("btnCreate")}
       </Button>
     </>
   );
