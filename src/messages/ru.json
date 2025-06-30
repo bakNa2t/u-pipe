@@ -37,6 +37,17 @@
     "loadingMore": "Загружаю ещё...",
     "reachedEndOfTheList": "Вы достигли конца списка"
   },
+  "Studio": {
+    "channelContent": "Контент",
+    "channelContentDesc": "Управляйте контентом и видео вашего канала",
+    "headerVideo": "Видео",
+    "headerVisibility": "Видимость",
+    "headerStatus": "Статус",
+    "headerDate": "Дата",
+    "headerVews": "Просмотры",
+    "headerComments": "Комментарии",
+    "headerLikes": "Лайки"
+  },
   "Toast": {
     "videoUpload": "Видео успешно загружено",
     "somethingWrong": "Что-то пошло не так"

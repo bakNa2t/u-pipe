@@ -1,12 +1,16 @@
+import { useTranslations } from "next-intl";
+
 import { VideosSection } from "../sections/VideosSection";
 
 export const StudioView = () => {
+  const t = useTranslations("Studio");
+
   return (
     <div className="flex flex-col gap-y-6 pt-2.5">
       <div className="px-4">
-        <h1 className="text-2xl font-bold">Channel content</h1>
+        <h1 className="text-2xl font-bold">{t("channelContent")}</h1>
         <p className="text-xs text-muted-foreground">
-          Manage your channel content and videos
+          {t("channelContentDesc")}
         </p>
       </div>
 

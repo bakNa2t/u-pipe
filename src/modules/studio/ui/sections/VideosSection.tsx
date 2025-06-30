@@ -22,6 +22,7 @@ import { VideoThumbnail } from "@/modules/videos/ui/components/VideoThumbnail";
 import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
 import { snakeCaseToTitle } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export const VideosSection = () => {
   return (
@@ -34,19 +35,26 @@ export const VideosSection = () => {
 };
 
 const VideosSectionSkeleton = () => {
+  const t = useTranslations("Studio");
   return (
     <>
       <div className="border-y">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[510px] pl-6">Video</TableHead>
-              <TableHead>Visibility</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead className="text-right">Views</TableHead>
-              <TableHead className="text-right">Comments</TableHead>
-              <TableHead className="text-right pr-6">Likes</TableHead>
+              <TableHead className="w-[510px] pl-6">
+                {t("headerVideo")}
+              </TableHead>
+              <TableHead>{t("headerVisibility")}</TableHead>
+              <TableHead>{t("headerStatus")}</TableHead>
+              <TableHead>{t("headerDate")}</TableHead>
+              <TableHead className="text-right">{t("headerVews")}</TableHead>
+              <TableHead className="text-right">
+                {t("headerComments")}
+              </TableHead>
+              <TableHead className="text-right pr-6">
+                {t("headerLikes")}
+              </TableHead>
             </TableRow>
           </TableHeader>
 
@@ -106,19 +114,27 @@ const VideosSectionSuspense = () => {
     }
   );
 
+  const t = useTranslations("Studio");
+
   return (
     <div>
       <div className="border-y">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[510px] pl-6">Video</TableHead>
-              <TableHead>Visibility</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead className="text-right">Views</TableHead>
-              <TableHead className="text-right">Comments</TableHead>
-              <TableHead className="text-right pr-6">Likes</TableHead>
+              <TableHead className="w-[510px] pl-6">
+                {t("headerVideo")}
+              </TableHead>
+              <TableHead>{t("headerVisibility")}</TableHead>
+              <TableHead>{t("headerStatus")}</TableHead>
+              <TableHead>{t("headerDate")}</TableHead>
+              <TableHead className="text-right">{t("headerVews")}</TableHead>
+              <TableHead className="text-right">
+                {t("headerComments")}
+              </TableHead>
+              <TableHead className="text-right pr-6">
+                {t("headerLikes")}
+              </TableHead>
             </TableRow>
           </TableHeader>
 
