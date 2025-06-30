@@ -59,6 +59,7 @@ import { snakeCaseToTitle } from "@/lib/utils";
 
 import { APP_URL } from "@/constants";
 import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
+import { useTranslations } from "next-intl";
 
 interface FormSectionProps {
   videoId: string;
@@ -109,7 +110,7 @@ const FormSectionSkeleton = () => {
         </div>
 
         <div className="flex flex-col gap-y-8 lg:col-span-2">
-          <div className="flex flex-col gap-4 bg-[#f9f9f9] rounded-xl overflow-hidden h-fit">
+          <div className="flex flex-col gap-4 bg-[#f9f9f9] dark:bg-[#222222] rounded-xl overflow-hidden h-fit">
             <Skeleton className="aspect-video" />
 
             <div className="p-4 space-y-6">
@@ -145,6 +146,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false);
   const [thumbnailGenerateModalOpen, setThumbnailGenerateModalOpen] =
     useState(false);
+  const t = useTranslations("Studio");
 
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
@@ -256,9 +258,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
           {/* Header block */}
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-2xl font-bold">Video details</h1>
+              <h1 className="text-2xl font-bold">{t("videoDetails")}</h1>
               <p className="text-xs text-muted-foreground">
-                Mange your video details
+                {t("videoDetailsDesc")}
               </p>
             </div>
 
@@ -267,7 +269,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 type="submit"
                 disabled={update.isPending || !form.formState.isDirty}
               >
-                Save
+                {t("btnSaveDetails")}
               </Button>
 
               <DropdownMenu>
@@ -282,13 +284,13 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     onClick={() => revalidate.mutate({ id: videoId })}
                   >
                     <RotateCcwIcon className="size-4 mr-2" />
-                    Revalidate
+                    {t("menuItemRevalidate")}
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => remove.mutate({ id: videoId })}
                   >
                     <TrashIcon className="size-4 mr-2" />
-                    Delete
+                    {t("menuItemDelete")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -306,7 +308,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   <FormItem>
                     <FormLabel>
                       <div className="flex items-center gap-x-2">
-                        Title
+                        {t("formLableTitle")}
                         <Button
                           size="icon"
                           variant="ghost"
@@ -329,7 +331,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="Add a title for your video"
+                        placeholder={t("formLableTitlePlaceholder")}
                       />
                     </FormControl>
 
@@ -346,7 +348,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   <FormItem>
                     <FormLabel>
                       <div className="flex items-center gap-x-2">
-                        Description
+                        {t("formLabelDescription")}
                         <Button
                           size="icon"
                           variant="ghost"
@@ -374,7 +376,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                         value={field.value ?? ""}
                         rows={8}
                         className="pr-10 resize-none"
-                        placeholder="Add a description for your video"
+                        placeholder={t("formLabelDescriptionPlaceholder")}
                       />
                     </FormControl>
 
@@ -389,7 +391,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 control={form.control}
                 render={() => (
                   <FormItem>
-                    <FormLabel>Thumbnail</FormLabel>
+                    <FormLabel>{t("formLabelThumbnail")}</FormLabel>
                     <FormControl>
                       <div className="relative w-[153px] h-[84px] p-0.5 border border-dashed border-border border-neutral-500 group">
                         <Image
@@ -415,7 +417,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                               onClick={() => setThumbnailModalOpen(true)}
                             >
                               <ImagePlusIcon className="size-4 mr-1" />
-                              Change
+                              {t("formLabelThumbnailSelectItemChange")}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={() =>
@@ -423,7 +425,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                               }
                             >
                               <SparkleIcon className="size-4 mr-1" />
-                              Ai-generated
+                              {t("formLabelThumbnailSelectItemGenerate")}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={() =>
@@ -431,7 +433,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                               }
                             >
                               <RotateCcwIcon className="size-4 mr-1" />
-                              Restore
+                              {t("formLabelThumbnailSelectItemRestore")}
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -447,7 +449,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 name="categoryId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>{t("formLabelCategory")}</FormLabel>
 
                     <Select
                       onValueChange={field.onChange}
@@ -489,7 +491,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   <div className="flex justify-between items-center gap-x-2">
                     <div className="flex flex-col gap-y-1">
                       <p className="text-xs text-muted-foreground">
-                        Video link
+                        {t("videoLink")}
                       </p>
 
                       <div className="flex items-center gap-x-2">
@@ -517,7 +519,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   <div className="flex justify-between items-center">
                     <div className="flex flex-col gap-y-1">
                       <p className="text-xs text-muted-foreground">
-                        Video status
+                        {t("videoStatus")}
                       </p>
                       <p className="text-sm">
                         {snakeCaseToTitle(video.muxStatus || "preparing")}
@@ -529,7 +531,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   <div className="flex justify-between items-center">
                     <div className="flex flex-col gap-y-1">
                       <p className="text-xs text-muted-foreground">
-                        Subtitles status
+                        {t("videoSubtitlesStatus")}
                       </p>
                       <p className="text-sm">
                         {snakeCaseToTitle(
@@ -547,7 +549,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 name="visibility"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Visibility</FormLabel>
+                    <FormLabel>{t("formLabelVisibility")}</FormLabel>
 
                     <Select
                       onValueChange={field.onChange}
@@ -555,7 +557,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select visibility" />
+                          <SelectValue
+                            placeholder={t("videoSelectVisibilityPlaceholder")}
+                          />
                         </SelectTrigger>
                       </FormControl>
 
@@ -563,13 +567,13 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                         <SelectItem value="public">
                           <div className="flex items-center">
                             <Globe2Icon className="size-4 mr-2" />
-                            Public
+                            {t("videoSelectItemPublic")}
                           </div>
                         </SelectItem>
                         <SelectItem value="private">
                           <div className="flex items-center">
                             <LockIcon className="size-4 mr-2" />
-                            Private
+                            {t("videoSelectItemPrivate")}
                           </div>
                         </SelectItem>
                       </SelectContent>
