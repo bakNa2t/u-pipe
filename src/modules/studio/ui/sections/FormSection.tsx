@@ -457,7 +457,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
+                          <SelectValue
+                            placeholder={t("formLabelCategoryPlaceholder")}
+                          />
                         </SelectTrigger>
                       </FormControl>
 

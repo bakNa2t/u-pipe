@@ -93,5 +93,15 @@
     "moreMenuShare": "Поделиться",
     "moreMenuAddToPlaylist": "Добавить в плейлист",
     "moreMenuRemove": "Удалить"
+  },
+  "Videos": {
+    "views": "просмотр(ов)",
+    "comments": "комментариев",
+    "likes": "лайков",
+    "noDescription": "Нет описания",
+    "showLess": "Меньше",
+    "showMore": "Больше",
+    "subscribers": "подписчиков",
+    "btnEditVideo": "Редактировать"
   }
 }

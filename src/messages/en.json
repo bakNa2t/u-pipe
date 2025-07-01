@@ -93,5 +93,15 @@
     "moreMenuShare": "Share",
     "moreMenuAddToPlaylist": "Add to playlist",
     "moreMenuRemove": "Remove"
+  },
+  "Videos": {
+    "views": "views",
+    "comments": "comments",
+    "likes": "likes",
+    "noDescription": "No description",
+    "showLess": "Show less",
+    "showMore": "Show more",
+    "subscribers": "subscribers",
+    "btnEditVideo": "Edit video"
   }
 }

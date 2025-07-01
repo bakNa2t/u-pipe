@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { useTranslations } from "next-intl";
 
 import { UserAvatar } from "@/components/user-avatar";
 import { UserInfo } from "@/modules/users/ui/components/UserInfo";
@@ -27,6 +28,8 @@ export const VideoInfoSkeleton = () => {
 };
 
 export const VideoInfo = ({ data, onRemove }: VideoInfoProps) => {
+  const t = useTranslations("Videos");
+
   const compactViews = useMemo(() => {
     return Intl.NumberFormat("en", {
       notation: "compact",
@@ -55,7 +58,7 @@ export const VideoInfo = ({ data, onRemove }: VideoInfoProps) => {
 
         <Link href={`/videos/${data.id}`}>
           <p className="text-sm text-gray-500 line-clamp-1">
-            {compactViews} views &bull; {compactDate}
+            {compactViews} {t("views")} &bull; {compactDate}
           </p>
         </Link>
       </div>

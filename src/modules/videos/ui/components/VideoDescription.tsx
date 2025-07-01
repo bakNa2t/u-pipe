@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -19,6 +20,7 @@ export const VideoDescription = ({
   description,
 }: VideoDescriptionProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const t = useTranslations("Videos");
 
   return (
     <div
@@ -27,7 +29,7 @@ export const VideoDescription = ({
     >
       <div className="flex gap-2 text-sm mb-2">
         <span className="font-medium">
-          {isExpanded ? expandedViews : compactViews} views
+          {isExpanded ? expandedViews : compactViews} {t("views")}
         </span>
         <span className="font-medium">
           {isExpanded ? expandedDate : compactDate}
@@ -41,17 +43,17 @@ export const VideoDescription = ({
             !isExpanded && "line-clamp-2"
           )}
         >
-          {description || "No description"}
+          {description || t("noDescription")}
         </p>
 
         <div className="flex items-center gap-1 mt-4 text-sm font-medium">
           {isExpanded ? (
             <>
-              Show less <ChevronUpIcon className="size-4" />
+              {t("showLess")} <ChevronUpIcon className="size-4" />
             </>
           ) : (
             <>
-              Show more <ChevronDownIcon className="size-4" />
+              {t("showMore")} <ChevronDownIcon className="size-4" />
             </>
           )}
         </div>

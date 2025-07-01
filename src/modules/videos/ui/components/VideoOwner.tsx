@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
 
 import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ interface VideoOwnerProps {
 
 export const VideoOwner = ({ user, videoId }: VideoOwnerProps) => {
   const { userId: clerkUserId, isLoaded } = useAuth();
+  const t = useTranslations("Videos");
 
   const { isPending, onClick } = useSubscription({
     userId: user.id,
@@ -32,7 +34,7 @@ export const VideoOwner = ({ user, videoId }: VideoOwnerProps) => {
           <div className="flex flex-col gap-1 min-w-0">
             <UserInfo size="lg" name={user.name} />
             <span className="text-sm text-muted-foreground line-clamp-1">
-              {user.subscriberCount} subscribers
+              {user.subscriberCount} {t("subscribers")}
             </span>
           </div>
         </div>
@@ -40,7 +42,7 @@ export const VideoOwner = ({ user, videoId }: VideoOwnerProps) => {
 
       {clerkUserId === user.clerkId ? (
         <Button variant="secondary" className="rounded-full" asChild>
-          <Link href={`/studio/videos/${videoId}`}>Edit video</Link>
+          <Link href={`/studio/videos/${videoId}`}>{t("btnEditVideo")}</Link>
         </Button>
       ) : (
         <SubscriptionButton
