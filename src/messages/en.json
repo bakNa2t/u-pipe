@@ -76,6 +76,7 @@
     "formLabelThumbnailSelectItemGenerate": "Ai-generated",
     "formLabelThumbnailSelectItemRestore": "Restore",
     "formLabelCategory": "Category",
+    "formLabelCategoryPlaceholder": "Select a category",
     "formLabelVisibility": "Visibility",
     "videoLink": "Video link",
     "videoStatus": "Video status",
@@ -87,5 +88,10 @@
   "Toast": {
     "videoUpload": "Video uploaded successfully",
     "somethingWrong": "Something went wrong"
+  },
+  "Components": {
+    "moreMenuShare": "Share",
+    "moreMenuAddToPlaylist": "Add to playlist",
+    "moreMenuRemove": "Remove"
   }
 }

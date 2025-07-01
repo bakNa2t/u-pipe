@@ -76,6 +76,7 @@
     "formLabelThumbnailSelectItemGenerate": "ИИ-генерация",
     "formLabelThumbnailSelectItemRestore": "Восстановить",
     "formLabelCategory": "Категория",
+    "formLabelCategoryPlaceholder": "Выберите категорию",
     "formLabelVisibility": "Видимость",
     "videoLink": "Ссылка на видео",
     "videoStatus": "Статус видео",
@@ -87,5 +88,10 @@
   "Toast": {
     "videoUpload": "Видео успешно загружено",
     "somethingWrong": "Что-то пошло не так"
+  },
+  "Components": {
+    "moreMenuShare": "Поделиться",
+    "moreMenuAddToPlaylist": "Добавить в плейлист",
+    "moreMenuRemove": "Удалить"
   }
 }

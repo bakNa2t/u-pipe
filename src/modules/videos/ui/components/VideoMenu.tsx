@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth, useClerk } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
 import {
   ListPlusIcon,
   MoreVerticalIcon,
@@ -33,6 +34,7 @@ export const VideoMenu = ({
   const [isOpenPlaylistAddModal, setIsOpenPlaylistAddModal] = useState(false);
   const { isSignedIn } = useAuth();
   const clerkUser = useClerk();
+  const t = useTranslations("Components");
 
   const onShare = () => {
     const fullUrl = `${APP_URL}/videos/${videoId}`;
@@ -58,7 +60,7 @@ export const VideoMenu = ({
         <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
           <DropdownMenuItem onClick={onShare}>
             <ShareIcon className="size-4 mr-2" />
-            Share
+            {t("moreMenuShare")}
           </DropdownMenuItem>
 
           <DropdownMenuItem
@@ -72,13 +74,13 @@ export const VideoMenu = ({
             }}
           >
             <ListPlusIcon className="size-4 mr-2" />
-            Add to playlist
+            {t("moreMenuAddToPlaylist")}
           </DropdownMenuItem>
 
           {onRemove && (
             <DropdownMenuItem onClick={onRemove}>
               <Trash2Icon className="size-4 mr-2" />
-              Remove
+              {t("moreMenuRemove")}
             </DropdownMenuItem>
           )}
         </DropdownMenuContent>
