@@ -6,7 +6,13 @@
     "trending": "Тренды",
     "trendingDesc": "Самые популярные видео на данный момент",
     "history": "История",
-    "historyDesc": "Все видео, которые вы посмотрели"
+    "historyDesc": "Все видео, которые вы посмотрели",
+    "liked": "Понравившиеся видео",
+    "likedDesc": "Все понравившиеся вам видео",
+    "playlists": "Плейлисты",
+    "playlistsDesc": "Видео коллекции, которые вы создали",
+    "allSubscriptions": "Все подписки",
+    "allSubscriptionsDesc": "Просмотр и управление всеми вашими подписками"
   },
   "Sidebar": {
     "home": "Главная",
@@ -16,7 +22,7 @@
     "history": "История",
     "likedVideos": "Понравившиеся видео",
     "allPlaylists": "Все плейлисты",
-    "allSubscriptions": "Все подписчики",
+    "allSubscriptions": "Все подписки",
     "studioContent": "Контент",
     "studioExit": "Выйти из студии",
     "studioProfile": "Ваш профиль"

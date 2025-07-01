@@ -6,7 +6,13 @@
     "trending": "Trending",
     "trendingDesc": "Most popular videos at the monent",
     "history": "History",
-    "historyDesc": "All videos you have watched"
+    "historyDesc": "All videos you have watched",
+    "liked": "Liked",
+    "likedDesc": "All videos you have liked",
+    "playlists": "Playlists",
+    "playlistsDesc": "Videos collections you have created",
+    "allSubscriptions": "All subscriptions",
+    "allSubscriptionsDesc": "View and manage all your subscriptions"
   },
   "Sidebar": {
     "home": "Home",
