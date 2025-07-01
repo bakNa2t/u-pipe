@@ -2,7 +2,11 @@
   "Home": {
     "welcome": "Welcome to Upipe",
     "subscribed": "Subscribed",
-    "subscribedDesc": "Videos from your favorite subscriptions"
+    "subscribedDesc": "Videos from your favorite subscriptions",
+    "trending": "Trending",
+    "trendingDesc": "Most popular videos at the monent",
+    "history": "History",
+    "historyDesc": "All videos you have watched"
   },
   "Sidebar": {
     "home": "Home",
