@@ -102,6 +102,8 @@
     "showLess": "Меньше",
     "showMore": "Больше",
     "subscribers": "подписчиков",
-    "btnEditVideo": "Редактировать"
+    "btnEditVideo": "Редактировать",
+    "bannerAlertInfo": "Видео все еще в процессе обработки",
+    "tooltipDesc": "Из описания видео"
   }
 }

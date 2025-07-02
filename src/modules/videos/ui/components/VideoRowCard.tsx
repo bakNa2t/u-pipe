@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { cva, VariantProps } from "class-variance-authority";
 
 import { UserAvatar } from "@/components/user-avatar";
@@ -90,6 +91,8 @@ export const VideoRowCard = ({
   size = "default",
   onRemove,
 }: VideoRowCardProps) => {
+  const t = useTranslations("Videos");
+
   const compactViews = useMemo(() => {
     return Intl.NumberFormat("en", {
       notation: "compact",
@@ -128,7 +131,7 @@ export const VideoRowCard = ({
 
             {size === "default" && (
               <p className="text-sm text-muted-foreground mt-1">
-                {compactViews} views &bull; {compactLikes} likes
+                {compactViews} {t("views")} &bull; {compactLikes} {t("likes")}
               </p>
             )}
 
@@ -147,16 +150,16 @@ export const VideoRowCard = ({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <p className="w-fit text-xs text-muted-foreground line-clamp-2">
-                      {data.description ?? "No description"}
+                      {data.description ?? t("noDescription")}
                     </p>
                   </TooltipTrigger>
 
                   <TooltipContent
                     side="bottom"
                     align="center"
-                    className="bg-black/70"
+                    className="bg-black/70 dark:bg-black/10"
                   >
-                    <p>From the video description</p>
+                    <p>{t("tooltipDesc")}</p>
                   </TooltipContent>
                 </Tooltip>
               </>
@@ -166,7 +169,7 @@ export const VideoRowCard = ({
 
             {size === "compact" && (
               <p className="text-sm text-muted-foreground mt-1">
-                {compactViews} views &bull; {compactLikes} likes
+                {compactViews} {t("views")} &bull; {compactLikes} {t("likes")}
               </p>
             )}
           </Link>

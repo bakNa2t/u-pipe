@@ -102,6 +102,8 @@
     "showLess": "Show less",
     "showMore": "Show more",
     "subscribers": "subscribers",
-    "btnEditVideo": "Edit video"
+    "btnEditVideo": "Edit video",
+    "bannerAlertInfo": "This video is still being processed",
+    "tooltipDesc": "From the video description"
   }
 }
