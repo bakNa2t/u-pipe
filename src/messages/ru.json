@@ -85,10 +85,6 @@
     "videoSelectItemPrivate": "Приватное",
     "videoSelectItemPublic": "Публичное"
   },
-  "Toast": {
-    "videoUpload": "Видео успешно загружено",
-    "somethingWrong": "Что-то пошло не так"
-  },
   "Components": {
     "moreMenuShare": "Поделиться",
     "moreMenuAddToPlaylist": "Добавить в плейлист",
@@ -117,5 +113,19 @@
     "formInputPlaceholder": "Введите название плейлиста...",
     "formBtnCreate": "Создать",
     "videosFromPlaylist": "Видео плейлиста"
+  },
+  "Comments": {
+    "user": "User",
+    "formReplyPlaceholder": "Reply to this comment...",
+    "formCommentPlaceholder": "Add a comment...",
+    "formCancelBtn": "Cancel",
+    "formReplyBtn": "Reply",
+    "formCommentBtn": "Comment",
+    "deleteBtn": "Delete",
+    "replies": "replies"
+  },
+  "Toast": {
+    "videoUpload": "Видео успешно загружено",
+    "somethingWrong": "Что-то пошло не так"
   }
 }

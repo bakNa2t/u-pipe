@@ -85,10 +85,6 @@
     "videoSelectItemPrivate": "Private",
     "videoSelectItemPublic": "Public"
   },
-  "Toast": {
-    "videoUpload": "Video uploaded successfully",
-    "somethingWrong": "Something went wrong"
-  },
   "Components": {
     "moreMenuShare": "Share",
     "moreMenuAddToPlaylist": "Add to playlist",
@@ -117,5 +113,19 @@
     "formInputPlaceholder": "Type playlist name...",
     "formBtnCreate": "Create",
     "videosFromPlaylist": "Videos from the playlist"
+  },
+  "Comments": {
+    "user": "User",
+    "formReplyPlaceholder": "Reply to this comment...",
+    "formCommentPlaceholder": "Add a comment...",
+    "cancelBtn": "Cancel",
+    "replyBtn": "Reply",
+    "commentBtn": "Comment",
+    "deleteBtn": "Delete",
+    "replies": "replies"
+  },
+  "Toast": {
+    "videoUpload": "Video uploaded successfully",
+    "somethingWrong": "Something went wrong"
   }
 }
