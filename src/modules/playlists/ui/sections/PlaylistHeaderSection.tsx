@@ -2,6 +2,7 @@
 
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Trash2Icon } from "lucide-react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -42,6 +43,7 @@ const PlaylistHeaderSectionSuspense = ({
   const utils = trpc.useUtils();
   const router = useRouter();
   const [playlist] = trpc.playlists.getOne.useSuspenseQuery({ id: playlistId });
+  const t = useTranslations("Playlists");
 
   const remove = trpc.playlists.remove.useMutation({
     onSuccess: () => {
@@ -59,7 +61,7 @@ const PlaylistHeaderSectionSuspense = ({
       <div>
         <h1 className="text-2xl font-bold">{playlist.name}</h1>
         <p className="text-xs text-muted-foreground">
-          Videos from the playlist
+          {t("videosFromPlaylist")}
         </p>
       </div>
 

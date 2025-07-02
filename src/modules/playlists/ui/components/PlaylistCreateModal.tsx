@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { trpc } from "@/trpc/client";
 import { toast } from "sonner";
@@ -29,6 +30,8 @@ export const PlaylistCreateModal = ({
   open,
   onOpenChange,
 }: PlaylistCreateModalProps) => {
+  const t = useTranslations("Playlists");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,7 +61,7 @@ export const PlaylistCreateModal = ({
 
   return (
     <ResponsiveModal
-      title="Create a playlist"
+      title={t("modalCreatePlaylistTitle")}
       open={open}
       onOpenChange={onOpenChange}
     >
@@ -72,9 +75,9 @@ export const PlaylistCreateModal = ({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Enter name</FormLabel>
+                <FormLabel>{t("formLableTitle")}</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Type playlist name..." />
+                  <Input {...field} placeholder={t("formInputPlaceholder")} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -83,7 +86,7 @@ export const PlaylistCreateModal = ({
 
           <div className="flex justify-end">
             <Button type="submit" disabled={create.isPending}>
-              Create
+              {t("formBtnCreate")}
             </Button>
           </div>
         </form>

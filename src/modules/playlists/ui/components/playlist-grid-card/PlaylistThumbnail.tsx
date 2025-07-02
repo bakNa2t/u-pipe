@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { ListVideoIcon, PlayIcon } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
@@ -28,6 +29,8 @@ export const PlaylistThumbnail = ({
   imageUrl,
   className,
 }: PlaylistThumbnailProps) => {
+  const t = useTranslations("Playlists");
+
   const compactViews = useMemo(() => {
     return Intl.NumberFormat("en", {
       notation: "compact",
@@ -39,8 +42,8 @@ export const PlaylistThumbnail = ({
       {/* Stack effect */}
       <div className="relative">
         {/* Background layers */}
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-[97%] overflow-hidden rounded-xl bg-black/20 aspect-video" />
-        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-[98.5%] overflow-hidden rounded-xl bg-black/25 aspect-video" />
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-[97%] overflow-hidden rounded-xl bg-black/20 dark:bg-white/15 aspect-video" />
+        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-[98.5%] overflow-hidden rounded-xl bg-black/25 dark:bg-white/10 aspect-video" />
 
         {/* Main thumbnail */}
         <div className="relative w-full rounded-xl overflow-hidden aspect-video">
@@ -56,7 +59,7 @@ export const PlaylistThumbnail = ({
         <div className="absolute flex items-center justify-center inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
           <div className="flex items-center gap-x-2">
             <PlayIcon className="size-4 text-white fill-white" />
-            <span className="text-white  font-medium">Play all</span>
+            <span className="text-white font-medium">{t("playAll")}</span>
           </div>
         </div>
       </div>
@@ -64,7 +67,7 @@ export const PlaylistThumbnail = ({
       {/* Video count */}
       <div className="absolute bottom-2 right-2 flex items-center gap-x-1 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">
         <ListVideoIcon className="size-4" />
-        {compactViews} videos
+        {compactViews} {t("videos")}
       </div>
     </div>
   );

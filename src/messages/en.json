@@ -105,5 +105,17 @@
     "btnEditVideo": "Edit video",
     "bannerAlertInfo": "This video is still being processed",
     "tooltipDesc": "From the video description"
+  },
+  "Playlists": {
+    "playlist": "Playlist",
+    "playlistDesc": "View full playlist",
+    "playAll": "Play all",
+    "videos": "videos",
+    "modalAddPlaylistTitle": "Add to a playlist",
+    "modalCreatePlaylistTitle": "Create a playlist",
+    "formLableTitle": "Enter name",
+    "formInputPlaceholder": "Type playlist name...",
+    "formBtnCreate": "Create",
+    "videosFromPlaylist": "Videos from the playlist"
   }
 }

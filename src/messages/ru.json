@@ -105,5 +105,17 @@
     "btnEditVideo": "Редактировать",
     "bannerAlertInfo": "Видео все еще в процессе обработки",
     "tooltipDesc": "Из описания видео"
+  },
+  "Playlists": {
+    "playlist": "Плейлист",
+    "playlistDesc": "Просмотреть весь плейлист",
+    "playAll": "Воспроизвести все",
+    "videos": "видео",
+    "modalAddPlaylistTitle": "Добавить в плейлист",
+    "modalCreatePlaylistTitle": "Создать плейлист",
+    "formLableTitle": "Название плейлиста",
+    "formInputPlaceholder": "Введите название плейлиста...",
+    "formBtnCreate": "Создать",
+    "videosFromPlaylist": "Видео плейлиста"
   }
 }

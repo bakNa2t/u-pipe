@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Loader2Icon, SquareCheckIcon, SquareIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -37,6 +38,8 @@ export const PlaylistAddModal = ({
     }
   );
 
+  const t = useTranslations("Playlists");
+
   const addVideo = trpc.playlists.addVideo.useMutation({
     onSuccess: (data) => {
       toast.success("Video added to playlist");
@@ -65,7 +68,7 @@ export const PlaylistAddModal = ({
 
   return (
     <ResponsiveModal
-      title="Add to a playlist"
+      title={t("modalAddPlaylistTitle")}
       open={open}
       onOpenChange={onOpenChange}
     >
