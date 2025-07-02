@@ -122,7 +122,8 @@
     "replyBtn": "Reply",
     "commentBtn": "Comment",
     "deleteBtn": "Delete",
-    "replies": "replies"
+    "replies": "replies",
+    "showMoreReplies": "Show more replies"
   },
   "Toast": {
     "videoUpload": "Video uploaded successfully",

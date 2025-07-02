@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import { useUser, useClerk } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -36,6 +37,7 @@ export const CommentForm = ({
   const { user } = useUser();
   const clerk = useClerk();
   const utils = trpc.useUtils();
+  const t = useTranslations("Comments");
 
   const create = trpc.comments.create.useMutation({
     onSuccess: () => {
@@ -82,7 +84,7 @@ export const CommentForm = ({
         <UserAvatar
           size="lg"
           imageUrl={user?.imageUrl ?? "/default-avatar.svg"}
-          name={user?.username || "User"}
+          name={user?.username || t("user")}
         />
 
         <div className="flex-1">
@@ -96,8 +98,8 @@ export const CommentForm = ({
                     {...field}
                     placeholder={
                       variant === "reply"
-                        ? "Reply to this comment..."
-                        : "Add a comment..."
+                        ? t("formReplyPlaceholder")
+                        : t("formCommentPlaceholder")
                     }
                     className="resize-none bg-transparent overflow-hidden min-h-0"
                   />
@@ -110,12 +112,12 @@ export const CommentForm = ({
           <div className="flex justify-end gap-2 mt-2">
             {onCancel && (
               <Button variant="ghost" type="button" onClick={handleCancel}>
-                Cancel
+                {t("cancelBtn")}
               </Button>
             )}
 
             <Button type="submit" size="sm" disabled={create.isPending}>
-              {variant === "reply" ? "Reply" : "Comment"}
+              {variant === "reply" ? t("replyBtn") : t("commentBtn")}
             </Button>
           </div>
         </div>

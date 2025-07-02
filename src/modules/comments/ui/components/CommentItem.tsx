@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import {
   ChevronDownIcon,
@@ -39,6 +40,7 @@ export const CommentItem = ({
 }: CommentItemProps) => {
   const clerk = useClerk();
   const { userId } = useAuth();
+  const t = useTranslations("Comments");
 
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [isRepliesOpen, setIsRepliesOpen] = useState(false);
@@ -156,7 +158,7 @@ export const CommentItem = ({
                 className="size-8"
                 onClick={() => setIsReplyOpen(true)}
               >
-                Reply
+                {t("replyBtn")}
               </Button>
             )}
           </div>
@@ -172,7 +174,7 @@ export const CommentItem = ({
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={() => setIsReplyOpen(true)}>
               <MessageSquareIcon className="size-4" />
-              Reply
+              {t("replyBtn")}
             </DropdownMenuItem>
 
             {comment.user.clerkId === userId && (
@@ -180,7 +182,7 @@ export const CommentItem = ({
                 onClick={() => remove.mutate({ id: comment.id })}
               >
                 <Trash2Icon className="size-4" />
-                Delete
+                {t("deleteBtn")}
               </DropdownMenuItem>
             )}
           </DropdownMenuContent>
@@ -210,7 +212,7 @@ export const CommentItem = ({
             onClick={() => setIsRepliesOpen((current) => !current)}
           >
             {isRepliesOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-            {comment.replyCount} replies
+            {comment.replyCount} {t("replies")}
           </Button>
         </div>
       )}

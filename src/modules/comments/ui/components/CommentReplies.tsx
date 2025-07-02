@@ -1,4 +1,5 @@
 import { trpc } from "@/trpc/client";
+import { useTranslations } from "next-intl";
 import { CornerDownRightIcon, Loader2Icon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ export const CommentReplies = ({ parentId, videoId }: CommentRepliesProps) => {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
       }
     );
+  const t = useTranslations("Comments");
 
   return (
     <div className="pl-14">
@@ -49,7 +51,7 @@ export const CommentReplies = ({ parentId, videoId }: CommentRepliesProps) => {
           disabled={isFetchingNextPage}
         >
           <CornerDownRightIcon />
-          Show more replies
+          {t("showMoreReplies")}
         </Button>
       )}
     </div>

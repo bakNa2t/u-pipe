@@ -115,14 +115,15 @@
     "videosFromPlaylist": "Видео плейлиста"
   },
   "Comments": {
-    "user": "User",
-    "formReplyPlaceholder": "Reply to this comment...",
-    "formCommentPlaceholder": "Add a comment...",
-    "formCancelBtn": "Cancel",
-    "formReplyBtn": "Reply",
-    "formCommentBtn": "Comment",
-    "deleteBtn": "Delete",
-    "replies": "replies"
+    "user": "Пользователь",
+    "formReplyPlaceholder": "Ответить на этот комментарий...",
+    "formCommentPlaceholder": "Добавить комментарий...",
+    "formCancelBtn": "Отменить",
+    "formReplyBtn": "Ответить",
+    "formCommentBtn": "Комментировать",
+    "deleteBtn": "Удалить",
+    "replies": "ответов",
+    "showMoreReplies": "Показать еще ответов"
   },
   "Toast": {
     "videoUpload": "Видео успешно загружено",
