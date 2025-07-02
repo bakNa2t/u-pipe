@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import {
   ChevronDownIcon,
@@ -40,6 +40,7 @@ export const CommentItem = ({
 }: CommentItemProps) => {
   const clerk = useClerk();
   const { userId } = useAuth();
+  const locale = useLocale();
   const t = useTranslations("Comments");
 
   const [isReplyOpen, setIsReplyOpen] = useState(false);
@@ -155,7 +156,7 @@ export const CommentItem = ({
               <Button
                 variant="ghost"
                 size="sm"
-                className="size-8"
+                className={locale === "en" ? "size-8" : "h-8 w-fit"}
                 onClick={() => setIsReplyOpen(true)}
               >
                 {t("replyBtn")}
