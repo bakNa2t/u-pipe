@@ -1,4 +1,5 @@
 import { trpc } from "@/trpc/client";
+import { useTranslations } from "next-intl";
 
 import { ResponsiveModal } from "@/components/responsive-modal";
 import { UploadDropzone } from "@/lib/uploadthing";
@@ -15,6 +16,7 @@ export const StudioThumbnailUploadModal = ({
   onOpenChange,
 }: StudioThumbnailUploadModal) => {
   const utils = trpc.useUtils();
+  const t = useTranslations("Components");
 
   const onUploadComplete = () => {
     utils.studio.getMany.invalidate();
@@ -24,7 +26,7 @@ export const StudioThumbnailUploadModal = ({
 
   return (
     <ResponsiveModal
-      title="Upload a thumbnail"
+      title={t("studioUploadThumbnail")}
       open={open}
       onOpenChange={onOpenChange}
     >

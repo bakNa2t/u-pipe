@@ -1,4 +1,5 @@
 import { trpc } from "@/trpc/client";
+import { useTranslations } from "next-intl";
 
 import { ResponsiveModal } from "@/components/responsive-modal";
 import { UploadDropzone } from "@/lib/uploadthing";
@@ -15,6 +16,7 @@ export const UserBannerUploadModal = ({
   onOpenChange,
 }: UserBannerUploadModal) => {
   const utils = trpc.useUtils();
+  const t = useTranslations("Components");
 
   const onUploadComplete = () => {
     utils.users.getOne.invalidate({ id: userId });
@@ -23,7 +25,7 @@ export const UserBannerUploadModal = ({
 
   return (
     <ResponsiveModal
-      title="Upload a banner"
+      title={t("userUploadBanner")}
       open={open}
       onOpenChange={onOpenChange}
     >

@@ -89,7 +89,9 @@
   "Components": {
     "moreMenuShare": "Поделиться",
     "moreMenuAddToPlaylist": "Добавить в плейлист",
-    "moreMenuRemove": "Удалить"
+    "moreMenuRemove": "Удалить",
+    "userUploadBanner": "Загрузить баннер",
+    "studioUploadThumbnail": "Загрузить превью"
   },
   "Videos": {
     "views": "просмотр(ов)",
