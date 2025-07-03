@@ -129,6 +129,11 @@
     "showMoreReplies": "Показать еще ответов",
     "comments": "комментариев"
   },
+  "Users": {
+    "subscribers": "подписчиков",
+    "videos": "видео",
+    "btnGoToStudio": "В студию"
+  },
   "Toast": {
     "videoUpload": "Видео успешно загружено",
     "somethingWrong": "Что-то пошло не так"

@@ -89,7 +89,9 @@
   "Components": {
     "moreMenuShare": "Share",
     "moreMenuAddToPlaylist": "Add to playlist",
-    "moreMenuRemove": "Remove"
+    "moreMenuRemove": "Remove",
+    "userUploadBanner": "Upload a banner",
+    "studioUploadThumbnail": "Upload a thumbnail"
   },
   "Videos": {
     "views": "views",
@@ -126,6 +128,11 @@
     "replies": "replies",
     "showMoreReplies": "Show more replies",
     "comments": "comments"
+  },
+  "Users": {
+    "subscribers": "subscribers",
+    "videos": "videos",
+    "btnGoToStudio": "Go to studio"
   },
   "Toast": {
     "videoUpload": "Video uploaded successfully",
