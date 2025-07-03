@@ -2,6 +2,7 @@
 
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useTranslations } from "next-intl";
 import { Loader2Icon } from "lucide-react";
 
 import { CommentForm } from "@/modules/comments/ui/components/CommentForm";
@@ -42,11 +43,13 @@ const CommentsSectionSuspense = ({ videoId }: CommentsSectionProps) => {
     }
   );
 
+  const t = useTranslations("Comments");
+
   return (
     <div className="mt-6 ">
       <div className="flex flex-col gap-6">
         <h1 className="text-xl font-bold">
-          {comments.pages[0].totalCount} comments
+          {comments.pages[0].totalCount} {t("comments")}
         </h1>
         <CommentForm videoId={videoId} onSuccess={() => {}} />
       </div>

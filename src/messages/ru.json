@@ -83,7 +83,8 @@
     "videoSubtitlesStatus": "Статус субтитров",
     "videoSelectVisibilityPlaceholder": "Выберите видимость",
     "videoSelectItemPrivate": "Приватное",
-    "videoSelectItemPublic": "Публичное"
+    "videoSelectItemPublic": "Публичное",
+    "noDescription": "Нет описания"
   },
   "Components": {
     "moreMenuShare": "Поделиться",
@@ -118,12 +119,13 @@
     "user": "Пользователь",
     "formReplyPlaceholder": "Ответить на этот комментарий...",
     "formCommentPlaceholder": "Добавить комментарий...",
-    "formCancelBtn": "Отменить",
-    "formReplyBtn": "Ответить",
-    "formCommentBtn": "Комментировать",
+    "cancelBtn": "Отменить",
+    "replyBtn": "Ответить",
+    "commentBtn": "Комментировать",
     "deleteBtn": "Удалить",
     "replies": "ответов",
-    "showMoreReplies": "Показать еще ответов"
+    "showMoreReplies": "Показать еще ответов",
+    "comments": "комментариев"
   },
   "Toast": {
     "videoUpload": "Видео успешно загружено",

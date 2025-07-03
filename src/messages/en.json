@@ -83,7 +83,8 @@
     "videoSubtitlesStatus": "Subtitles status",
     "videoSelectVisibilityPlaceholder": "Select visibility",
     "videoSelectItemPrivate": "Private",
-    "videoSelectItemPublic": "Public"
+    "videoSelectItemPublic": "Public",
+    "noDescription": "No description"
   },
   "Components": {
     "moreMenuShare": "Share",
@@ -123,7 +124,8 @@
     "commentBtn": "Comment",
     "deleteBtn": "Delete",
     "replies": "replies",
-    "showMoreReplies": "Show more replies"
+    "showMoreReplies": "Show more replies",
+    "comments": "comments"
   },
   "Toast": {
     "videoUpload": "Video uploaded successfully",
