@@ -135,7 +135,30 @@
     "btnGoToStudio": "Go to studio"
   },
   "Toast": {
+    "playlistCreated": "Playlist created",
+    "playlistDeleted": "Playlist deleted",
+    "videoRemovedFromPlaylist": "Video removed from playlist",
+    "videoAddedToPlaylist": "Video added to playlist",
+    "commentAdded": "Comment added",
+    "commentDeleted": "Comment deleted",
     "videoUpload": "Video uploaded successfully",
+    "videoUpdated": "Video updated successfully",
+    "videoRemoved": "Video removed successfully",
+    "videoRevalidated": "Video revalidated",
+    "thumnbnailRestored": "Thhumbnail restored successfully",
+    "subscribed": "Subscribed successfully",
+    "unsubscribed": "Unsubscribed successfully",
+    "backgroundJobStarted": "Background job started",
+    "linkCopiedToClipboard": "Link copied to the clipboard",
+    "failedToAddVideoToPlaylist": "Failed to add video to playlist",
+    "failedToRemoveVideoFromPlaylist": "Failed to remove video from playlist",
+    "failedToGenerateThumbnail": "Failed to generate thumbnail",
+    "failedToRestoreThumbnail": "Failed to restore thumbnail",
+    "failedToUpdateVideo": "Failed to update video",
+    "failedToRemoveVideo": "Failed to remove video",
+    "failedToRevalidateVideo": "Failed to revalidate video",
+    "failedToGenerateTitle": "Failed to generate title",
+    "failedToGenerateDescription": "Failed to generate description",
     "somethingWrong": "Something went wrong"
   }
 }

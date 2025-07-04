@@ -135,7 +135,30 @@
     "btnGoToStudio": "В студию"
   },
   "Toast": {
-    "videoUpload": "Видео успешно загружено",
+    "playlistCreated": "Плейлист создан",
+    "playlistDeleted": "Плейлист удален",
+    "videoRemovedFromPlaylist": "Видео удалено из плейлиста",
+    "videoAddedToPlaylist": "Видео добавлено в плейлист",
+    "commentAdded": "Комментарий добавлен",
+    "commentDeleted": "Комментарий удален",
+    "videoUpload": "Видео загружено успешно",
+    "videoUpdated": "Видео обновлено успешно",
+    "videoRemoved": "Видео удалено успешно",
+    "videoRevalidated": "Видео повторно проверено",
+    "thumnbnailRestored": "Превью восстановлено успешно",
+    "subscribed": "Подписка создана",
+    "unsubscribed": "Подписка удалена",
+    "backgroundJobStarted": "Обработка задачи начата",
+    "linkCopiedToClipboard": "Ссылка скопирована в буфер обмена",
+    "failedToAddVideoToPlaylist": "Не удалось добавить видео в плейлист",
+    "failedToRemoveVideoFromPlaylist": "Не удалось удалить видео из плейлиста",
+    "failedToGenerateThumbnail": "Не удалось сгенерировать превью",
+    "failedToRestoreThumbnail": "Не удалось восстановить превью",
+    "failedToUpdateVideo": "Не удалось обновить видео",
+    "failedToRemoveVideo": "Не удалось удалить видео",
+    "failedToRevalidateVideo": "Не удалось повторно проверить видео",
+    "failedToGenerateTitle": "Не удалось сгенерировать название",
+    "failedToGenerateDescription": "Не удалось сгенерировать описание",
     "somethingWrong": "Что-то пошло не так"
   }
 }
