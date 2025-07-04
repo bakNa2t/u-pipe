@@ -31,6 +31,7 @@ export const PlaylistCreateModal = ({
   onOpenChange,
 }: PlaylistCreateModalProps) => {
   const t = useTranslations("Playlists");
+  const tToast = useTranslations("Toast");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,12 +46,12 @@ export const PlaylistCreateModal = ({
     onSuccess: () => {
       utils.playlists.getMany.invalidate();
 
-      toast.success("Playlist created");
+      toast.success(tToast("playlistCreated"));
       form.reset();
       onOpenChange(false);
     },
     onError: () => {
-      toast.error("Failed to generate thumbnail");
+      toast.error(tToast("failedToCreatePlaylist"));
     },
   });
 

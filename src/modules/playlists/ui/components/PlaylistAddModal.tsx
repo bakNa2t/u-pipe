@@ -39,30 +39,31 @@ export const PlaylistAddModal = ({
   );
 
   const t = useTranslations("Playlists");
+  const tToast = useTranslations("Toast");
 
   const addVideo = trpc.playlists.addVideo.useMutation({
     onSuccess: (data) => {
-      toast.success("Video added to playlist");
+      toast.success(tToast("videoAddedToPlaylist"));
       utils.playlists.getMany.invalidate();
       utils.playlists.getManyForVideo.invalidate({ videoId });
       utils.playlists.getOne.invalidate({ id: data.playlistId });
       utils.playlists.getVideos.invalidate({ playlistId: data.playlistId });
     },
     onError: () => {
-      toast.error("Failed to add video to playlist");
+      toast.error(tToast("failedToAddVideoToPlaylist"));
     },
   });
 
   const removeVideo = trpc.playlists.removeVideo.useMutation({
     onSuccess: (data) => {
-      toast.success("Video removed from playlist");
+      toast.success(tToast("videoRemovedFromPlaylist"));
       utils.playlists.getMany.invalidate();
       utils.playlists.getManyForVideo.invalidate({ videoId });
       utils.playlists.getOne.invalidate({ id: data.playlistId });
       utils.playlists.getVideos.invalidate({ playlistId: data.playlistId });
     },
     onError: () => {
-      toast.error("Failed to remove video to playlist");
+      toast.error(tToast("failedToRemoveVideoFromPlaylist"));
     },
   });
 

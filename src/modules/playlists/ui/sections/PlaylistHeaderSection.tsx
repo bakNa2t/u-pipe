@@ -44,15 +44,16 @@ const PlaylistHeaderSectionSuspense = ({
   const router = useRouter();
   const [playlist] = trpc.playlists.getOne.useSuspenseQuery({ id: playlistId });
   const t = useTranslations("Playlists");
+  const tToast = useTranslations("Toast");
 
   const remove = trpc.playlists.remove.useMutation({
     onSuccess: () => {
-      toast.success("Playlist deleted");
+      toast.success(tToast("playlistDeleted"));
       utils.playlists.getMany.invalidate();
       router.push("/playlists");
     },
     onError: () => {
-      toast.error("Something went wrong");
+      toast.error(tToast("failedToDeletePlaylist"));
     },
   });
 

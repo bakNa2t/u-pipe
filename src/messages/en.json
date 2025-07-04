@@ -150,6 +150,8 @@
     "unsubscribed": "Unsubscribed successfully",
     "backgroundJobStarted": "Background job started",
     "linkCopiedToClipboard": "Link copied to the clipboard",
+    "failedToCreatePlaylist": "Failed to create a playlist",
+    "failedToDeletePlaylist": "Failed to delete a playlist",
     "failedToAddVideoToPlaylist": "Failed to add video to playlist",
     "failedToRemoveVideoFromPlaylist": "Failed to remove video from playlist",
     "failedToGenerateThumbnail": "Failed to generate thumbnail",

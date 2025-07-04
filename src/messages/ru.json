@@ -150,6 +150,8 @@
     "unsubscribed": "Подписка удалена",
     "backgroundJobStarted": "Обработка задачи начата",
     "linkCopiedToClipboard": "Ссылка скопирована в буфер обмена",
+    "failedToCreatePlaylist": "Не удалось создать плейлист",
+    "failedToDeletePlaylist": "Не удалось удалить плейлист",
     "failedToAddVideoToPlaylist": "Не удалось добавить видео в плейлист",
     "failedToRemoveVideoFromPlaylist": "Не удалось удалить видео из плейлиста",
     "failedToGenerateThumbnail": "Не удалось сгенерировать превью",
