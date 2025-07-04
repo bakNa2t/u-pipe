@@ -9,7 +9,7 @@ import { AdvancedMenu } from "./AdvancedMenu";
 
 export const HomeNavbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-[#131313] flex items-center px-2 md:pr-5 z-50">
+    <nav className="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-[#191919] flex items-center px-2 md:pr-5 z-50">
       <div className="flex items-center gap-4 w-full">
         {/* Logo */}
         <div className="flex items-center flex-shrink-0">

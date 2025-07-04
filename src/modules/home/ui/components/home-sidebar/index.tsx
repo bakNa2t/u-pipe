@@ -9,16 +9,16 @@ import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
 export const HomeSidebar = () => {
   return (
     <Sidebar className="pt-16 border-none z-40" collapsible="icon">
-      <SidebarContent className="bg-background">
+      <SidebarContent className="bg-background dark:bg-[#191919]">
         <MainSection />
 
-        <Separator />
+        <Separator className="dark:bg-white/60" />
 
         <PersonalSection />
 
         <SignedIn>
           <>
-            <Separator />
+            <Separator className="dark:bg-white/60" />
             <SubscriptionsSection />
           </>
         </SignedIn>
