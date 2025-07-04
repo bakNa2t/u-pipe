@@ -38,6 +38,7 @@ export const CommentForm = ({
   const clerk = useClerk();
   const utils = trpc.useUtils();
   const t = useTranslations("Comments");
+  const tToast = useTranslations("Toast");
 
   const create = trpc.comments.create.useMutation({
     onSuccess: () => {
@@ -45,11 +46,11 @@ export const CommentForm = ({
       utils.comments.getMany.invalidate({ videoId, parentId });
       form.reset();
 
-      toast.success("Comment added");
+      toast.success(tToast("commentAdded"));
       onSuccess?.();
     },
     onError: (error) => {
-      toast.error("Something went wrong");
+      toast.error(tToast("somethingWrong"));
 
       if (error.data?.code === "UNAUTHORIZED") {
         clerk.openSignIn();

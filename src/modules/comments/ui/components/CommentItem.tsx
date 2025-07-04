@@ -42,6 +42,7 @@ export const CommentItem = ({
   const { userId } = useAuth();
   const locale = useLocale();
   const t = useTranslations("Comments");
+  const tToast = useTranslations("Toast");
 
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [isRepliesOpen, setIsRepliesOpen] = useState(false);
@@ -50,11 +51,11 @@ export const CommentItem = ({
 
   const remove = trpc.comments.remove.useMutation({
     onSuccess: () => {
-      toast.success("Comment deleted");
+      toast.success(tToast("commentDeleted"));
       utils.comments.getMany.invalidate({ videoId: comment.videoId });
     },
     onError: (error) => {
-      toast.error("Something went wrong");
+      toast.error(tToast("somethingWrong"));
 
       if (error.data?.code === "UNAUTHORIZED") {
         clerk.openSignIn();
@@ -67,7 +68,7 @@ export const CommentItem = ({
       utils.comments.getMany.invalidate({ videoId: comment.videoId });
     },
     onError: (error) => {
-      toast.error("Something went wrong");
+      toast.error(tToast("somethingWrong"));
 
       if (error.data?.code === "UNAUTHORIZED") {
         clerk.openSignIn();
@@ -79,7 +80,7 @@ export const CommentItem = ({
       utils.comments.getMany.invalidate({ videoId: comment.videoId });
     },
     onError: (error) => {
-      toast.error("Something went wrong");
+      toast.error(tToast("somethingWrong"));
 
       if (error.data?.code === "UNAUTHORIZED") {
         clerk.openSignIn();
