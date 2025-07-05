@@ -149,6 +149,7 @@
     "subscribed": "Подписка создана",
     "unsubscribed": "Подписка удалена",
     "backgroundJobStarted": "Обработка задачи начата",
+    "backgroundJobDesc": "Это может занять несколько минут",
     "linkCopiedToClipboard": "Ссылка скопирована в буфер обмена",
     "failedToCreatePlaylist": "Не удалось создать плейлист",
     "failedToDeletePlaylist": "Не удалось удалить плейлист",

@@ -149,6 +149,7 @@
     "subscribed": "Subscribed successfully",
     "unsubscribed": "Unsubscribed successfully",
     "backgroundJobStarted": "Background job started",
+    "backgroundJobDesc": "This may take a few minutes",
     "linkCopiedToClipboard": "Link copied to the clipboard",
     "failedToCreatePlaylist": "Failed to create a playlist",
     "failedToDeletePlaylist": "Failed to delete a playlist",
