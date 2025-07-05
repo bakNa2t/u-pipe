@@ -147,6 +147,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const [thumbnailGenerateModalOpen, setThumbnailGenerateModalOpen] =
     useState(false);
   const t = useTranslations("Studio");
+  const tToast = useTranslations("Toast");
 
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
@@ -157,21 +158,21 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
       utils.studio.getMany.invalidate();
       utils.studio.getOne.invalidate({ id: videoId });
 
-      toast.success("Video updated successfully");
+      toast.success(tToast("videoUpdated"));
     },
     onError: () => {
-      toast.error("Failed to update video");
+      toast.error(tToast("failedToUpdateVideo"));
     },
   });
 
   const remove = trpc.videos.remove.useMutation({
     onSuccess: () => {
       utils.studio.getMany.invalidate();
-      toast.success("Video removed successfully");
+      toast.success(tToast("videoRemoved"));
       router.push("/studio");
     },
     onError: () => {
-      toast.error("Failed to remove video");
+      toast.error(tToast("failedToRemoveVideo"));
     },
   });
 
@@ -179,32 +180,32 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     onSuccess: () => {
       utils.studio.getMany.invalidate();
       utils.studio.getOne.invalidate({ id: videoId });
-      toast.success("Video revalitated");
+      toast.success(tToast("videoRevalidated"));
     },
     onError: () => {
-      toast.error("Failed to revalitate video");
+      toast.error(tToast("failedToRevalidateVideo"));
     },
   });
 
   const generateTitle = trpc.videos.generateTitle.useMutation({
     onSuccess: () => {
-      toast.success("Background job started", {
-        description: "This may take a few minutes",
+      toast.success(tToast("backgroundJobStarted"), {
+        description: tToast("backgroundJobStarted"),
       });
     },
     onError: () => {
-      toast.error("Failed to generate thumbnail");
+      toast.error(tToast("failedToGenerateTitle"));
     },
   });
 
   const generateDescription = trpc.videos.generateDescription.useMutation({
     onSuccess: () => {
-      toast.success("Background job started", {
-        description: "This may take a few minutes",
+      toast.success(tToast("backgroundJobStarted"), {
+        description: tToast("backgroundJobStarted"),
       });
     },
     onError: () => {
-      toast.error("Failed to generate thumbnail");
+      toast.error(tToast("failedToGenerateDescription"));
     },
   });
 
@@ -212,10 +213,10 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     onSuccess: () => {
       utils.studio.getMany.invalidate();
       utils.studio.getOne.invalidate({ id: videoId });
-      toast.success("Thhumbnail restored successfully");
+      toast.success(tToast("thumnbnailRestored"));
     },
     onError: () => {
-      toast.error("Failed to restore thumbnail");
+      toast.error(tToast("failedToRestoreThumbnail"));
     },
   });
 
