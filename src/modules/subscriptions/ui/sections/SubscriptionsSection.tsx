@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
 import { InfiniteScroll } from "@/components/infinite-scroll";
@@ -36,6 +37,7 @@ const SubscriptionsSectionSkeleton = () => {
 
 const SubscriptionsSectionSuspense = () => {
   const utils = trpc.useUtils();
+  const tToast = useTranslations("Toast");
 
   const [subscriptions, query] =
     trpc.subscriptions.getMany.useSuspenseInfiniteQuery(
@@ -49,14 +51,14 @@ const SubscriptionsSectionSuspense = () => {
 
   const unsubscribe = trpc.subscriptions.remove.useMutation({
     onSuccess: (data) => {
-      toast.success("Unsubscribed successfully");
+      toast.success(tToast("unsubscribed"));
 
       utils.videos.getManySubscribed.invalidate();
       utils.users.getOne.invalidate({ id: data.creatorId });
       utils.subscriptions.getMany.invalidate();
     },
     onError: () => {
-      toast.error("Something went wrong");
+      toast.error(tToast("somethingWrong"));
     },
   });
 
