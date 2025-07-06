@@ -16,6 +16,7 @@ import { InfiniteScroll } from "@/components/infinite-scroll";
 
 import { trpc } from "@/trpc/client";
 import { DEFAULT_LIMIT } from "@/constants";
+import { useTranslations } from "next-intl";
 
 interface VideosSectionProps {
   playlistId: string;
@@ -59,18 +60,20 @@ const VideosSectionSuspense = ({ playlistId }: VideosSectionProps) => {
     }
   );
 
+  const tToast = useTranslations("Toast");
+
   const utils = trpc.useUtils();
 
   const removeVideo = trpc.playlists.removeVideo.useMutation({
     onSuccess: (data) => {
-      toast.success("Video removed from playlist");
+      toast.success(tToast("videoRemovedFromPlaylist"));
       utils.playlists.getMany.invalidate();
       utils.playlists.getManyForVideo.invalidate({ videoId: data.videoId });
       utils.playlists.getOne.invalidate({ id: data.playlistId });
       utils.playlists.getVideos.invalidate({ playlistId: data.playlistId });
     },
     onError: () => {
-      toast.error("Failed to remove video to playlist");
+      toast.error(tToast("failedToRemoveVideoFromPlaylist"));
     },
   });
 
