@@ -1,6 +1,7 @@
 import { UserAvatar } from "@/components/user-avatar";
 import { SubscriptionButton } from "./SubscriptionButton";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslations } from "next-intl";
 
 interface SubscriptionItemProps {
   name: string;
@@ -36,6 +37,8 @@ export const SubscriptionItem = ({
   onUnsubscribe,
   disabled,
 }: SubscriptionItemProps) => {
+  const t = useTranslations("Users");
+
   return (
     <div className="flex items-center gap-4">
       <UserAvatar size="lg" imageUrl={imageUrl} name={name} />
@@ -45,7 +48,7 @@ export const SubscriptionItem = ({
           <div>
             <h2 className="text-sm">{name}</h2>
             <p className="text-xs text-muted-foreground">
-              {subscriberCount.toLocaleString()} subscribers
+              {subscriberCount.toLocaleString()} {t("subscribers")}
             </p>
           </div>
 
