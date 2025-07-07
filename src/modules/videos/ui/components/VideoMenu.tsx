@@ -35,12 +35,13 @@ export const VideoMenu = ({
   const { isSignedIn } = useAuth();
   const clerkUser = useClerk();
   const t = useTranslations("Components");
+  const tToast = useTranslations("Toasts");
 
   const onShare = () => {
     const fullUrl = `${APP_URL}/videos/${videoId}`;
 
     navigator.clipboard.writeText(fullUrl);
-    toast.success("Link copied to the clipboard");
+    toast.success(tToast("linkCopiedToClipboard"));
   };
 
   return (

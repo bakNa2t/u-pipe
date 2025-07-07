@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { trpc } from "@/trpc/client";
 import { toast } from "sonner";
@@ -31,6 +32,9 @@ export const StudioThumbnailGenerateModal = ({
   open,
   onOpenChange,
 }: StudioThumbnailGenerateModal) => {
+  const t = useTranslations("Components");
+  const tToast = useTranslations("Toast");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,14 +44,14 @@ export const StudioThumbnailGenerateModal = ({
 
   const generateThumbnail = trpc.videos.generateThumbnail.useMutation({
     onSuccess: () => {
-      toast.success("Background job started", {
-        description: "This may take a few minutes",
+      toast.success(tToast("backgroundJobStarted"), {
+        description: tToast("backgroundJobDesc"),
       });
       form.reset();
       onOpenChange(false);
     },
     onError: () => {
-      toast.error("Failed to generate thumbnail");
+      toast.error(tToast("failedToGenerateThumbnail"));
     },
   });
 
@@ -61,7 +65,7 @@ export const StudioThumbnailGenerateModal = ({
 
   return (
     <ResponsiveModal
-      title="Generate a thumbnail"
+      title={t("modalThumbnailTitle")}
       open={open}
       onOpenChange={onOpenChange}
     >
@@ -75,14 +79,14 @@ export const StudioThumbnailGenerateModal = ({
             name="prompt"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Prompt</FormLabel>
+                <FormLabel>{t("prompt")}</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
                     className="resize-none"
                     cols={30}
                     rows={5}
-                    placeholder="Enter a prompt to generate a thumbnail"
+                    placeholder={t("promptPlaceholder")}
                   />
                 </FormControl>
                 <FormMessage />
@@ -92,7 +96,7 @@ export const StudioThumbnailGenerateModal = ({
 
           <div className="flex justify-end">
             <Button type="submit" disabled={generateThumbnail.isPending}>
-              Generate
+              {t("btnGenerate")}
             </Button>
           </div>
         </form>
