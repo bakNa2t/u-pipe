@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Upipe
+
+A YouTube clone app built with modern web technologies, allowing users to upload, share, and stream videos. The app features a responsive design with a customizable appearance theme and language support.
+
+## Development with:
+
+<!-- ![NextJS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) -->
+
+- [NextJS](https://nextjs.org/docs)
+- [Shadcn-ui](https://ui.shadcn.com/docs)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Clerk](https://clerk.com/docs)
+- [Bun](https://bun.sh/docs/)
+- [tRPC](https://trpc.io/)
+- [Mux](https://www.mux.com/)
+- [Uploadthing](https://uploadthing.com/docs)
+- [Upstash](https://upstash.com)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [Neon](https://neon.com/)
+- [Next-intl](https://next-intl.dev/docs/getting-started)
+
+## Functionality:
+
+- mobile-responsive design;
+- intuitive, customizable UI using Tailwind CSS and ShadCN components;
+- authentication (sign-in / sign-up) with Clerk;
+- real-time data (save / fetch) sync using Convex;
+- full-featured note-taking and task management;
+- seamless storage management with EdgeStore;
+- support for multiple languages (English and Russian) using i18next;
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (>= 16.x)
+
+1. Clone the repository
+
+```
+https://github.com/bakNa2t/u-pipe.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install the dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+bun install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up the environment variables.
+   Create a <code>.env.local</code> file and add your API keys, database credentials, and other necessary environment variables.
 
-## Learn More
+```
+# Clerks keys
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="YOUR_CLERK_PUBLISHABLE_KEY"
+CLERK_SECRET_KEY="YOUR_CLERK_SECRET_KEY"
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in or your custom path
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up or your custom path
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/ or your custom path
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/ or your custom path
+CLERK_SIGNING_SECRET="YOUR_CLERK_SIGNING_SECRET"
 
-To learn more about Next.js, take a look at the following resources:
+# Neon database credentials
+DATABASE_URL="YOUR_NEON_DATABASE_URL"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Upstash keys
+UPSTASH_REDIS_REST_URL="YOUR_UPSTASH_REDIS_REST_URL"
+UPSTASH_REDIS_REST_TOKEN="YOUR_UPSTASH_REDIS_REST_TOKEN"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Mux keys
+MUX_TOKEN_ID="YOUR_MUX_TOKEN_ID"
+MUX_TOKEN_SECRET="YOUR_MUX_TOKEN_SECRET"
+MUX_WEBHOOK_SECRET="YOUR_MUX_WEBHOOK_SECRET"
 
-## Deploy on Vercel
+# Uploadthing key
+UPLOADTHING_TOKEN="YOUR_UPLOADTHING_TOKEN"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Upstash workflow
+UPSTASH_WORKFLOW_URL="YOUR_UPSTASH_WORKFLOW_URL"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+QSTASH_TOKEN="YOUR_QSTASH_TOKEN"
+QSTASH_CURRENT_SIGNING_KEY="YOUR_QSTASH_CURRENT_SIGNING_KEY"
+QSTASH_NEXT_SIGNING_KEY="YOUR_QSTASH_NEXT_SIGNING_KEY"
+
+# OpenAI key
+OPENAI_API_KEY="YOUR_OPENAI_API_KEY" if you want to use OpenAI
+
+# For public deployment
+NEXT_PUBLIC_APP_URL="YOUR_PUBLIC_APP_URL"
+```
+
+4. Run the development server
+
+```
+npm run dev
+```
+
+5. Open your browser and navigate to http://localhost:3000.
+
+click here to visit => [_**Upipe**_](https://github.com/bakNa2t/u-pipe.git)
