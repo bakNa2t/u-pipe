@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import { Button, ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +18,8 @@ export const SubscriptionButton = ({
   size,
   onClick,
 }: SubscriptionsButtonProps) => {
+  const t = useTranslations("Components");
+
   return (
     <Button
       size={size}
@@ -24,7 +28,7 @@ export const SubscriptionButton = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {isSubscribed ? "Unsubscribe" : "Subscribe"}
+      {isSubscribed ? t("unsubscribe") : t("subscribe")}
     </Button>
   );
 };
