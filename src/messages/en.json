@@ -91,7 +91,13 @@
     "moreMenuAddToPlaylist": "Add to playlist",
     "moreMenuRemove": "Remove",
     "userUploadBanner": "Upload a banner",
-    "studioUploadThumbnail": "Upload a thumbnail"
+    "studioUploadThumbnail": "Upload a thumbnail",
+    "modalThumbnailTitle": "Generate a thumbnail",
+    "prompt": "Prompt",
+    "promptPlaceholder": "Enter a prompt to generate a thumbnail",
+    "btnGenerate": "Generate",
+    "subscribe": "Subscribe",
+    "unsubscribe": "Unsubscribe"
   },
   "Videos": {
     "views": "views",

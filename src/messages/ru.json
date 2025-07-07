@@ -91,7 +91,13 @@
     "moreMenuAddToPlaylist": "Добавить в плейлист",
     "moreMenuRemove": "Удалить",
     "userUploadBanner": "Загрузить баннер",
-    "studioUploadThumbnail": "Загрузить превью"
+    "studioUploadThumbnail": "Загрузить превью",
+    "modalThumbnailTitle": "Генерация превью",
+    "prompt": "Промпт",
+    "promptPlaceholder": "Введите промпт для генерации превью",
+    "btnGenerate": "Сгенерировать",
+    "subscribe": "Подписаться",
+    "unsubscribe": "Отписаться"
   },
   "Videos": {
     "views": "просмотр(ов)",
