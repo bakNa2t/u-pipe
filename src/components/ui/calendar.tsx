@@ -1,13 +1,18 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { DayPicker } from "react-day-picker"
+import * as React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { DayPicker } from "react-day-picker";
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>
+export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+
+// interface CustomDayPickerComponents extends CustomComponents {
+//   IconLeft: React.ComponentType<{ className: string }>;
+//   IconRight: React.ComponentType<{ className: string }>;
+// }
 
 function Calendar({
   className,
@@ -60,17 +65,23 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ className, ...props }) => (
-          <ChevronLeft className={cn("h-4 w-4", className)} {...props} />
+        PreviousMonthButton: ({ className, ...props }) => (
+          <ChevronLeft
+            className={cn("h-4 w-4", className)}
+            {...(props as React.HTMLAttributes<SVGSVGElement>)}
+          />
         ),
-        IconRight: ({ className, ...props }) => (
-          <ChevronRight className={cn("h-4 w-4", className)} {...props} />
+        NextMonthButton: ({ className, ...props }) => (
+          <ChevronRight
+            className={cn("h-4 w-4", className)}
+            {...(props as React.HTMLAttributes<SVGSVGElement>)}
+          />
         ),
       }}
       {...props}
     />
-  )
+  );
 }
-Calendar.displayName = "Calendar"
+Calendar.displayName = "Calendar";
 
-export { Calendar }
+export { Calendar };
