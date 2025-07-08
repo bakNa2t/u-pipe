@@ -25,9 +25,11 @@ A YouTube clone app built with modern web technologies, allowing users to upload
 - mobile-responsive design;
 - intuitive, customizable UI using Tailwind CSS and ShadCN components;
 - authentication (sign-in / sign-up) with Clerk;
-- real-time data (save / fetch) sync using Convex;
-- full-featured note-taking and task management;
-- seamless storage management with EdgeStore;
+- streaming videos using Mux;
+- video upload and storage with Uploadthing and Upstash;
+- video metadata storage with Drizzle ORM and Neon;
+- user subscriptions with Upstash;
+- video sharing and comment system;
 - support for multiple languages (English and Russian) using i18next;
 
 ## Getting Started
