@@ -97,9 +97,19 @@ NEXT_PUBLIC_APP_URL="YOUR_PUBLIC_APP_URL"
 4. Run the development server
 
 ```
-npm run dev
+bun run dev
 ```
 
 5. Open your browser and navigate to http://localhost:3000.
 
-click here to visit => [_**Upipe**_](https://github.com/bakNa2t/u-pipe.git)
+click here to visit => [_**Upipe**_](https://u-pipe.vercel.app)
+
+<div align="center">
+    <p>
+        <a href="https://u-pipe.vercel.app" target="_blank" >
+            <img alt="Upipe" src ="./public/upipe-banner.png" width="1024">
+        </a>
+    </p>
+</div>
+
+### Acknowledgements by youtube tutorial [Code With Antonio](https://www.youtube.com/watch?v=ArmPzvHTcfQ)
